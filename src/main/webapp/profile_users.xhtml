@@ -53,7 +53,13 @@
                             <p:inputText id="name" value="#{p_uController.fullname}" size="60"/>
                             <p:outputLabel for="email" value="Email"/>
                             <p:inputText id="email" value="#{p_uController.email}" size="60"/>
-                            
+                            <p:outputLabel for="categoria" value="Tipo"/>
+                            <p:selectOneMenu id="categoria" value="#{p_uController.tipo}"  style="width:150px">
+
+                                <f:selectItem itemLabel="Administrador" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{p_uController.mapType}" />
+
+                            </p:selectOneMenu>
                         </p:panelGrid>    
                         <p:commandButton style="margin:5px;" value="Guardar" update=":f1:dt1 growl" icon="ui-icon-disk" action="#{p_uController.guardar()}" process="@form"/>
                         <p:commandButton style="margin:5px;" value="Cancelar" type="reset" onclick="PF('dlg2').hide();" icon="ui-icon-close"/>

@@ -6,10 +6,12 @@
 package com.sgm.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -42,6 +44,9 @@ public class Medico implements Serializable{
     @Size(max = 45)
     @Column(length = 45)
     private String specialty;
+    
+    @OneToMany(mappedBy = "medico", fetch = FetchType.LAZY)
+    private List<Consulta> consultas;
 
     public Medico() {
     }
@@ -92,6 +97,14 @@ public class Medico implements Serializable{
 
     public void setSexo(Integer sexo) {
         this.sexo = sexo;
+    }
+
+    public List<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void setConsultas(List<Consulta> consultas) {
+        this.consultas = consultas;
     }
     
     

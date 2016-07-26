@@ -4,9 +4,11 @@
  */
 package com.sgm.commands;
 
+import com.sgm.model.Grupo;
 import com.sgm.model.Utilizador;
 import com.sgm.service.RepositoryService;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -28,26 +30,12 @@ public class P_uController implements Serializable {
     private String password;
     private String fullname;
     private String email;
-    private String phone;
-    private String address;
-
-    private String isMale;
-    //-----------------------assistant----------
-    private String cardnumber;
-    //-----------------------doctor----------
-    private String medicalfield;
-    //-----------------------patient----------
-    private String nID;
-    private String bithdate;
-    private String nationality;
-    private String naturality;
-    private String maritalstatus;
-    private String profession;
-    private String workplace;
-    private String filiation;
-
+    
     private List<Utilizador> utilizadors;
     private String tselected;
+    
+    private HashMap<String, Object> mapType=new HashMap<>();
+    private String tipo;
 
     public P_uController() {
     }
@@ -59,8 +47,10 @@ public class P_uController implements Serializable {
         u.setEmail(email);
         u.setPassword(password);
         u.setUsername(username);
-        u.setTipo(1);
+        u.setGrupo((Grupo)mapType.get(tipo)); //admins
+        u.setTipo(u.getGrupo().getIdgrupo());
         u.setFullname(fullname);
+        
         try {
             csimp.create(u);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Guardado com Sucesso! ", "Guardado..."));
@@ -95,22 +85,6 @@ public class P_uController implements Serializable {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -119,95 +93,16 @@ public class P_uController implements Serializable {
         this.username = username;
     }
 
-    public String getIsMale() {
-        return isMale;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setIsMale(String isMale) {
-        this.isMale = isMale;
-    }
-
-    public String getCardnumber() {
-        return cardnumber;
-    }
-
-    public void setCardnumber(String cardnumber) {
-        this.cardnumber = cardnumber;
-    }
-
-    public String getMedicalfield() {
-        return medicalfield;
-    }
-
-    public void setMedicalfield(String medicalfield) {
-        this.medicalfield = medicalfield;
-    }
-
-    public String getnID() {
-        return nID;
-    }
-
-    public void setnID(String nID) {
-        this.nID = nID;
-    }
-
-    public String getBithdate() {
-        return bithdate;
-    }
-
-    public void setBithdate(String bithdate) {
-        this.bithdate = bithdate;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public String getNaturality() {
-        return naturality;
-    }
-
-    public void setNaturality(String naturality) {
-        this.naturality = naturality;
-    }
-
-    public String getMaritalstatus() {
-        return maritalstatus;
-    }
-
-    public void setMaritalstatus(String maritalstatus) {
-        this.maritalstatus = maritalstatus;
-    }
-
-    public String getProfession() {
-        return profession;
-    }
-
-    public void setProfession(String profession) {
-        this.profession = profession;
-    }
-
-    public String getWorkplace() {
-        return workplace;
-    }
-
-    public void setWorkplace(String workplace) {
-        this.workplace = workplace;
-    }
-
-    public String getFiliation() {
-        return filiation;
-    }
-
-    public void setFiliation(String filiation) {
-        this.filiation = filiation;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public List<Utilizador> getUtilizadors() {
+        utilizadors = csimp.findAll(Utilizador.class);
         return utilizadors;
     }
 
@@ -221,6 +116,17 @@ public class P_uController implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public HashMap<String, Object> getMapType() {
+        for (Grupo grupo : csimp.findAll(Grupo.class)) {
+            mapType.put(grupo.getDescription(), grupo);
+        }
+        return mapType;
+    }
+
+    public void setMapType(HashMap<String, Object> mapType) {
+        this.mapType = mapType;
     }
 
 }

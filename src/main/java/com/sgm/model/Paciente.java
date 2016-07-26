@@ -7,10 +7,12 @@ package com.sgm.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -60,6 +62,9 @@ public class Paciente implements Serializable{
     private Integer sexo;     //1-male, 0-female
     
     private Date birthdate;
+    
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    private List<Consulta> consultas;
 
     public Paciente() {
     }
@@ -158,6 +163,14 @@ public class Paciente implements Serializable{
 
     public void setSexo(Integer sexo) {
         this.sexo = sexo;
+    }
+
+    public List<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void setConsultas(List<Consulta> consultas) {
+        this.consultas = consultas;
     }
     
     

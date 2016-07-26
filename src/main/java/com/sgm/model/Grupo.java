@@ -53,6 +53,10 @@ public class Grupo implements Serializable{
     public Grupo() {
     }
 
+    public Grupo(Integer idgrupo) {
+        this.idgrupo = idgrupo;
+    }
+
     public Integer getIdgrupo() {
         return idgrupo;
     }
@@ -91,6 +95,11 @@ public class Grupo implements Serializable{
 
     public void setUtilizadores(List<Utilizador> utilizadores) {
         this.utilizadores = utilizadores;
+    }
+
+    @Override
+    public String toString() {
+        return description;
     }
     
     

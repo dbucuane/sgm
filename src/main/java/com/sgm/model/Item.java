@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -24,7 +26,11 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(catalog = "sgm", schema = "public")
-public class Item implements Serializable{
+@NamedQueries({
+    @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i"),
+    @NamedQuery(name = "Item.findByNameValue", query = "SELECT i FROM Item i WHERE i.nameValue = :namevalue")})
+public class Item implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +52,7 @@ public class Item implements Serializable{
     @Size(max = 255)
     @Column(length = 255)
     private String target;
-    
+
     @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
     private List<Grupo> grupos;
 
@@ -108,5 +114,10 @@ public class Item implements Serializable{
     public void setGrupos(List<Grupo> grupos) {
         this.grupos = grupos;
     }
-    
+
+    @Override
+    public String toString() {
+        return nameValue;
+    }
+
 }

@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>Criar Grupo</title>
+        </f:facet>
+        <style>
+            *{
+                font-size: 14px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="center" >
+                <h:form id="form1">
+                    <p:breadCrumb>
+                        <p:menuitem value="Utilitarios" url="#"/>
+                        <p:menuitem value="Criar Grupo" url="#"/>
+                    </p:breadCrumb>
+                    <p:commandButton style="margin:5px 0 5px 0;" value="Adicionar grupo" icon="ui-icon-plus" type="button" onclick="PF('dlg2').show();"/>
+
+
+                    <p:dataTable id="dtable" var="grupo" value="#{p_gController.grupos}">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{grupo.description}"/>
+                        </p:column>
+
+                        <p:column headerText="Observações">
+                            <h:outputText value="#{grupo.obs}"/>
+                        </p:column>
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton update=":form3:groupDetail" oncomplete="PF('dlg3').show()" icon="ui-icon-search" title="View">
+                                <f:setPropertyActionListener value="#{grupo}" target="#{p_gController.selectedgroup}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
+                </h:form>
+                <p:dialog header="Cadastrar Grupo" widgetVar="dlg2" style="font-size: 14px;" width="500">
+                    <h:form id="form2" >
+
+                        <p:growl id="growl" life="2000" />
+                        <p:panelGrid columns="2" style="width:380px;">
+                            <p:outputLabel value="Nome do Grupo"/>
+                            <p:inputText size="30" value="#{p_gController.nome}"  placeholder="inserir Grupo"/>
+                            <p:outputLabel value="Observações"/>
+                            <p:inputTextarea style="width:205px;" value="#{p_gController.obs}" placeholder="insira obs.."/>
+
+                            <p:selectCheckboxMenu id="menu" value="#{p_gController.selectedItems}" label="Itens" style="width:95%;"
+                                                  filter="true" filterMatchMode="startsWith" panelStyle="width:350px">
+                                <f:selectItems value="#{p_gController.items}" />
+                            </p:selectCheckboxMenu>
+                            <p:commandLink value="Submit" update="display" />
+
+
+                        </p:panelGrid>
+                        <p:outputPanel id="display" style="width:250px;padding-left:5px;margin-top:10px">
+                            <p:dataList value="#{p_gController.selectedItems}" var="item" emptyMessage="No cities selected">
+                                #{item}
+                            </p:dataList>
+                        </p:outputPanel>
+
+                        <p:commandButton style="margin:5px;" value="Guardar" update=":form1:dtable growl" icon="ui-icon-disk" action="#{p_gController.guardar()}" process="@form"/>
+                        <p:commandButton style="margin:5px;" value="Cancelar" onclick="PF('dlg2').hide();" icon="ui-icon-close"/>
+
+                    </h:form>
+                </p:dialog>
+                <p:dialog header="Ver Grupo" widgetVar="dlg3" style="font-size: 14px;" >
+                    <h:form id="form3" >
+
+                        <p:growl id="growl" life="2000" />
+                        <p:outputPanel id="groupDetail" style="text-align:center; width:250px">
+                            <p:panelGrid  columns="2" rendered="#{not empty p_gController.selectedgroup}" columnClasses="label,value">
+
+                                <h:outputText value="Nome:"/>
+                                <h:outputText value="#{p_gController.selectedgroup.description}" />
+
+                                <h:outputText value="Obs" />
+                                <h:outputText value="#{p_gController.selectedgroup.obs}" />
+
+                                <h:outputText value="Itens:" />
+                                <ui:repeat value="#{p_gController.selectedgroup.items}" var="item">
+                                    <h:outputText value="#{item.nameValue}" style="display:block"/>
+                                </ui:repeat>
+                            </p:panelGrid>
+                        </p:outputPanel>
+                    </h:form>
+                </p:dialog>
+                
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+

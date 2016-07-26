@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet author="user (generated)" id="1469535220700-1">
+    <changeSet author="user (generated)" id="1469550353527-1">
         <createTable tableName="Medico">
             <column name="cardnumber" type="VARCHAR(45)"/>
             <column name="email" type="VARCHAR(45)"/>
@@ -11,12 +11,12 @@
                 <constraints nullable="false"/>
             </column>
             <column name="specialty" type="VARCHAR(45)"/>
-            <column name="iduser" type="INT">
+            <column name="iduser_iduser" type="INT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1469535220700-2">
+    <changeSet author="user (generated)" id="1469550353527-2">
         <createTable tableName="Paciente">
             <column name="address" type="VARCHAR(45)"/>
             <column name="birthdate" type="datetime"/>
@@ -31,12 +31,12 @@
                 <constraints nullable="false"/>
             </column>
             <column name="workplace" type="VARCHAR(45)"/>
-            <column name="iduser" type="INT">
+            <column name="iduser_iduser" type="INT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1469535220700-3">
+    <changeSet author="user (generated)" id="1469550353527-3">
         <createTable tableName="Recepsionista">
             <column name="cardnumber" type="VARCHAR(45)"/>
             <column name="email" type="VARCHAR(45)"/>
@@ -44,35 +44,35 @@
             <column name="sexo" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="iduser" type="INT">
+            <column name="iduser_iduser" type="INT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1469535220700-4">
+    <changeSet author="user (generated)" id="1469550353527-4">
         <addColumn tableName="Utilizador">
             <column name="grupo" type="integer"/>
         </addColumn>
     </changeSet>
-    <changeSet author="user (generated)" id="1469535220700-5">
-        <addPrimaryKey columnNames="iduser" constraintName="MedicoPK" tableName="Medico"/>
+    <changeSet author="user (generated)" id="1469550353527-5">
+        <addPrimaryKey columnNames="iduser_iduser" constraintName="MedicoPK" tableName="Medico"/>
     </changeSet>
-    <changeSet author="user (generated)" id="1469535220700-6">
-        <addPrimaryKey columnNames="iduser" constraintName="PacientePK" tableName="Paciente"/>
+    <changeSet author="user (generated)" id="1469550353527-6">
+        <addPrimaryKey columnNames="iduser_iduser" constraintName="PacientePK" tableName="Paciente"/>
     </changeSet>
-    <changeSet author="user (generated)" id="1469535220700-7">
-        <addPrimaryKey columnNames="iduser" constraintName="RecepsionistaPK" tableName="Recepsionista"/>
+    <changeSet author="user (generated)" id="1469550353527-7">
+        <addPrimaryKey columnNames="iduser_iduser" constraintName="RecepsionistaPK" tableName="Recepsionista"/>
     </changeSet>
-    <changeSet author="user (generated)" id="1469535220700-8">
-        <addForeignKeyConstraint baseColumnNames="iduser" baseTableName="Medico" constraintName="FK_5txyq6soga98r6prn20b76b5d" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser" referencedTableName="Utilizador"/>
+    <changeSet author="user (generated)" id="1469550353527-8">
+        <addForeignKeyConstraint baseColumnNames="iduser_iduser" baseTableName="Medico" constraintName="FK_5txyq6soga98r6prn20b76b5d" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser" referencedTableName="Utilizador"/>
     </changeSet>
-    <changeSet author="user (generated)" id="1469535220700-9">
-        <addForeignKeyConstraint baseColumnNames="iduser" baseTableName="Paciente" constraintName="FK_avamruppk4jy5046ww3l92mox" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser" referencedTableName="Utilizador"/>
+    <changeSet author="user (generated)" id="1469550353527-9">
+        <addForeignKeyConstraint baseColumnNames="iduser_iduser" baseTableName="Paciente" constraintName="FK_avamruppk4jy5046ww3l92mox" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser" referencedTableName="Utilizador"/>
     </changeSet>
-    <changeSet author="user (generated)" id="1469535220700-10">
-        <addForeignKeyConstraint baseColumnNames="iduser" baseTableName="Recepsionista" constraintName="FK_brbfl5vhsp7rcpjcqupnmadeq" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser" referencedTableName="Utilizador"/>
+    <changeSet author="user (generated)" id="1469550353527-10">
+        <addForeignKeyConstraint baseColumnNames="iduser_iduser" baseTableName="Recepsionista" constraintName="FK_brbfl5vhsp7rcpjcqupnmadeq" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser" referencedTableName="Utilizador"/>
     </changeSet>
-    <changeSet author="user (generated)" id="1469535220700-11">
+    <changeSet author="user (generated)" id="1469550353527-11">
         <addForeignKeyConstraint baseColumnNames="grupo" baseTableName="Utilizador" constraintName="FK_mnr12tqe0d4oka633j63501ie" deferrable="false" initiallyDeferred="false" referencedColumnNames="idgrupo" referencedTableName="Grupo"/>
     </changeSet>
 </databaseChangeLog>

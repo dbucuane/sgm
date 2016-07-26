@@ -151,4 +151,14 @@ public class AuthenticationService implements Serializable{
     public void setImages(List<String> images) {
         this.images = images;
     }
+    
+    public void editPassword() throws Exception {
+        RequestContext context = RequestContext.getCurrentInstance();
+        utilizador.setPassword(password);
+
+        csimp.edit(utilizador);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Senha Alterada Com Sucesso...", username));
+        context.execute("PF('dialog1').hide();");
+    }
+
 }
