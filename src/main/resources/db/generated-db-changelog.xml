@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="User (generated)" id="1469448883257-1">
+        <addColumn tableName="Iuser">
+            <column name="fullname" type="varchar(45)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469448883257-2">
+        <addColumn tableName="Assistant">
+            <column name="iduserr_iduserr" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469448883257-3">
+        <addColumn tableName="Doctor">
+            <column name="iduserr_iduserr" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469448883257-4">
+        <addColumn tableName="Patient">
+            <column name="iduserr_iduserr" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469448883257-5">
+        <dropColumn columnName="iduserr" tableName="assistant"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469448883257-6">
+        <dropColumn columnName="iduserr" tableName="doctor"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469448883257-7">
+        <dropColumn columnName="iduserr" tableName="patient"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469448883257-8">
+        <dropNotNullConstraint columnDataType="boolean" columnName="isMale" tableName="Iuser"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469448883257-9">
+        <dropPrimaryKey tableName="Assistant"/>
+        <addPrimaryKey columnNames="iduserr_iduserr" constraintName="AssistantPK" tableName="Assistant"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469448883257-10">
+        <dropPrimaryKey tableName="Doctor"/>
+        <addPrimaryKey columnNames="iduserr_iduserr" constraintName="DoctorPK" tableName="Doctor"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469448883257-11">
+        <dropPrimaryKey tableName="Patient"/>
+        <addPrimaryKey columnNames="iduserr_iduserr" constraintName="PatientPK" tableName="Patient"/>
+    </changeSet>
+</databaseChangeLog>

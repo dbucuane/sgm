@@ -1,0 +1,66 @@
+/* 
+    Document   : style
+    Created on : Feb 9, 2015, 12:01:19 AM
+    Author     : User
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.ui-grid-row{
+    
+}
+.ui-grid-col-3{
+   
+    text-align: center;
+    height: 99%;
+}
+
+.ui-button{
+    background-image:none; 
+    background-color:#eee; 
+    color: black;
+    
+}
+
+.button{
+    background-image:none; 
+    background-color:#eee; 
+    color: black;
+}
+.ui-splitbutton .ui-button{
+    
+    background-image:none; 
+    background-color:#eee; 
+    color: black;
+}
+
+.ui-splitbutton .ui-splitbutton-menubutton{
+    background-image:none; 
+    background-color:#ccc; 
+    color: black;
+    
+}
+.ui-grid-col-4{
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB9JREFUeNpiYGBgEPr//z8DCIMBkAEWYIRywIIAAQYAPcIPFz/ScLMAAAAASUVORK5CYII=);
+    
+}
+
+
+#cab span{
+    color:#57aec2; 
+    font-family:'Segoe UI', Eras Bold ITC;
+    font-size:25px; 
+    margin-top:5px; 
+}
+#cab .ola{
+    color:#979797; 
+    padding:0px;
+    font-family:Eras Light ITC; 
+    font-size:14px; 
+}
+#cab .hello{
+    color: firebrick;
+    font-size:25px; 
+    margin-top:25px; 
+    margin-left:10px;
+    font-family:MS Reference Sans Serif;
+}

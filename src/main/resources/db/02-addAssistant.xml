@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="User (generated)" id="1469445813574-1">
+        <createTable tableName="Assistant">
+            <column name="cardnumber" type="VARCHAR(255)"/>
+            <column name="iduserr" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469445813574-2">
+        <addColumn tableName="Iuser">
+            <column name="isMale" type="bit">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469445813574-3">
+        <addColumn tableName="Iuser">
+            <column name="phone" type="varchar(45)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469445813574-4">
+        <addPrimaryKey columnNames="iduserr" constraintName="AssistantPK" tableName="Assistant"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469445813574-5">
+        <addForeignKeyConstraint baseColumnNames="iduserr" baseTableName="Assistant" constraintName="FK_8v6da5ppggjb6minb0wij19ds" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduserr" referencedTableName="Iuser"/>
+    </changeSet>
+    
+    
+</databaseChangeLog>
+

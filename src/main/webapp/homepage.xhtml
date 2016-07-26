@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Home</title>
+            </f:facet>
+            <style>
+                *{
+                    font-size: 14px;
+                }
+            </style>
+        </h:head>
+
+        <h:body>
+            <h:outputStylesheet library="css" name="style.css"  />
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="110" resizable="true" closable="true" collapsible="true">
+
+                    <div class="ui-grid ui-grid-responsive">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <div id="cab">
+                                    <div class="hello">
+                                        S<span>GM</span>
+                                        <div class="ola"><br/>Sistema de Gestão de Consultas Medicas</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui-grid-col-5">
+
+
+                            </div>
+                            <div class="ui-grid-col-3">
+
+                                <h:form>
+                                    <p:splitButton value="#{authenticationService.username}"  icon="ui-icon-unlocked">
+                                        <p:menuitem  value="Alterar Senha" actionListener="#{authenticationService.opendialog()}"  icon="ui-icon-wrench" />
+                                        <p:separator />
+                                        <p:menuitem value="Logout" icon="ui-icon-locked" action="#{authenticationService.logout()}" />
+                                    </p:splitButton>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="30" closable="true" collapsible="true" style="text-align: center;">
+                    <p:outputLabel value="Copyright @ SGM 2016"/>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="250" header="Utilitarios" collapsible="true" >
+                    <p:menu style="width:98%;" model="#{authenticationService.menuModel}" >
+
+                    </p:menu>
+                </p:layoutUnit>
+                <p:layoutUnit position="east" size="234" header="Utilitarios" collapsed="true" collapsible="true">
+                    <p:menu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center" >
+                    <iframe src="index2.jsf" name="frame" width="100%" height="100%" frameborder="0" ></iframe>
+
+                </p:layoutUnit>
+
+            </p:layout>
+            <p:dialog header="Alterar Senha" widgetVar="dialog1" style="font-size: 14px;" width="450">
+                <h:form id="formulario6" >
+                    <p:growl id="growl" life="2000" />
+                    <p:panelGrid columns="2" style="width:410px;">
+                        <p:outputLabel for="user" value="Username"/>
+                        <p:inputText id="user" disabled="true" size="35" value="#{authenticationService.username}"/>
+                        <p:outputLabel for="pass" value="Password"/>
+                        <p:inputText id="pass" size="35" value="#{authenticationService.password}"/>
+                    </p:panelGrid>
+                    <p:commandButton style="margin:5px;" value="Guardar" update="growl" actionListener="#{authenticationService.editPassword()}" icon="ui-icon-disk" />
+                    <p:commandButton style="margin:5px;" value="Cancelar" icon="ui-icon-close" type="reset" onclick="PF('dialog1').hide();"/>
+                </h:form>
+            </p:dialog>
+
+        </h:body>
+
+    </f:view>
+</html>
+

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>SGM Login</title>
+        <h:outputStylesheet library="css" name="loginPage.css"  />
+    </h:head>
+    <h:body>
+        
+        <div class="left">
+            <h1>Consultório Samona - Maxixe</h1>
+            <h4> Sistema de Gestão Medica</h4>
+        </div>
+        <div class="right">
+            <section>
+                <span></span>
+                <h1>Autenticação</h1>
+                <h:form>
+                    <p:growl id="growl" life="2000" />
+
+                    <h:panelGrid columns="1" style="width:100%;" cellpadding="3">
+                        <p:inputText id="username" styleClass="username" value="#{authenticationService.username}" placeholder="UserName"/>
+                        <p:password id="password" styleClass="username" value="#{authenticationService.password}" placeholder="Password"/>
+                        <p:commandButton value="Login" update="growl" action="#{authenticationService.login()}"  icon="ui-icon-disk" />
+                    </h:panelGrid>
+                </h:form>
+
+            </section>
+        </div>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="second">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>Criar Utilizador</title>
+        </f:facet>
+        <style> 
+            *{
+                font-size: 14px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="center" >
+                <h:form id="f1">
+                    <p:breadCrumb>
+                        <p:menuitem value="Utilitarios" url="#"/>
+                        <p:menuitem value="Gerir Utilizadores" url="#"/>
+                    </p:breadCrumb>
+                    <p:commandButton style="margin:5px 0 5px 0;" value="Adicionar Utilizador" icon="ui-icon-plus" type="reset" onclick="PF('dlg2').show();"/>
+
+                    <p:dataTable id="dt1" var="user" value="#{p_uController.iusers}">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{user.fullname}"/>
+                        </p:column>
+
+                        <p:column headerText="UserName">
+                            <h:outputText value="#{user.username}"/>
+                        </p:column>
+
+                        <p:column headerText="Tipo">
+                            <h:outputText value="#{user.type.desccription}"/>
+                        </p:column>
+                        <p:column headerText="Nome do Grupo">
+                            <h:outputText value="#{user.group.description}"/>
+                        </p:column>
+                        
+                    </p:dataTable>
+                </h:form>
+                <p:dialog header="Cadastrar Utilizador" widgetVar="dlg2" style="font-size: 14px;" width="600">
+                    <h:form id="f2">
+                        <p:growl id="growl" life="2000" />
+                        <p:panelGrid columns="2">
+                            <p:outputLabel for="usern" value="Username"/>
+                            <p:inputText id="usern" value="#{p_uController.username}" size="60" />
+                            <p:outputLabel for="name" value="Nome Completo"/>
+                            <p:inputText id="name" value="#{p_uController.fullname}" size="60"/>
+                            <p:outputLabel for="email" value="Email"/>
+                            <p:inputText id="email" value="#{p_uController.email}" size="60"/>
+                            <p:outputLabel for="conact" value="Contacto"/>
+                            <p:inputText id="conact" value="#{p_uController.phone}" size="60"/>
+                            <p:outputLabel for="adr" value="Endereco"/>
+                            <p:inputTextarea id="adr" value="#{p_uController.address}" cols="60"/>
+                            <p:outputLabel for="sex" value="Sexo"/>
+                            <p:selectOneMenu id="sex" value="#{p_uController.isMale}"  style="width:150px">
+
+                                <f:selectItem itemLabel="Masculino" itemValue="1" />
+                                <f:selectItem itemLabel="Feminino" itemValue="0" />
+
+                            </p:selectOneMenu>
+                            <p:outputLabel for="type" value="Tipo de Utilizador"/>
+                            <p:selectOneMenu id="type" value="#{p_uController.tselected}"  style="width:150px">
+
+                                <f:selectItem itemLabel="Seleccione Tipo... " itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{p_uController.mapType}" />
+
+                            </p:selectOneMenu>
+                            <p:outputLabel for="type" value="Tipo de Utilizador" rendered="#{p_uController.tselected = 'Paciente'}"/>
+                            
+                        </p:panelGrid>    
+                            
+                    </h:form>
+                </p:dialog>
+                
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+

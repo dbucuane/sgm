@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="User (generated)" id="1469446026530-2">
+        <dropColumn columnName="isMale" tableName="Iuser"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469446026830-3">
+        <dropNotNullConstraint columnDataType="boolean" columnName="isMale" tableName="Iuser"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469445813574-2">
+        <addColumn tableName="Iuser">
+            <column name="isMale" type="smallint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    
+    
+</databaseChangeLog>
+

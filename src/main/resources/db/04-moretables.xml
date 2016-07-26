@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="User (generated)" id="1469447345565-1">
+        <createTable tableName="Doctor">
+            <column name="medicalfield" type="VARCHAR(45)"/>
+            <column name="iduserr" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469447345565-2">
+        <createTable tableName="Patient">
+            <column name="birthdate" type="datetime"/>
+            <column name="filiation" type="VARCHAR(45)"/>
+            <column name="maritalstatus" type="VARCHAR(45)"/>
+            <column name="nationality" type="VARCHAR(45)"/>
+            <column name="naturality" type="VARCHAR(45)"/>
+            <column name="nid" type="VARCHAR(45)"/>
+            <column name="profession" type="VARCHAR(45)"/>
+            <column name="workplace" type="VARCHAR(45)"/>
+            <column name="iduserr" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469447345565-3">
+        <createTable tableName="Usertype">
+            <column autoIncrement="true" name="idtype" type="INT">
+                <constraints primaryKey="true" primaryKeyName="UsertypePK"/>
+            </column>
+            <column name="desccription" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469447345565-5">
+        <addColumn tableName="Iuser">
+            <column name="type" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469447345565-6">
+        <addPrimaryKey columnNames="iduserr" constraintName="DoctorPK" tableName="Doctor"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469447345565-7">
+        <addPrimaryKey columnNames="iduserr" constraintName="PatientPK" tableName="Patient"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469447345565-8">
+        <addForeignKeyConstraint baseColumnNames="type" baseTableName="Iuser" constraintName="FK_1qe2taof9kc0mom6dm42h0irc" deferrable="false" initiallyDeferred="false" referencedColumnNames="idtype" referencedTableName="Usertype"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469447345565-9">
+        <addForeignKeyConstraint baseColumnNames="iduserr" baseTableName="Doctor" constraintName="FK_5eaiof060stb82nwkomol4avp" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduserr" referencedTableName="Iuser"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1469447345565-10">
+        <addForeignKeyConstraint baseColumnNames="iduserr" baseTableName="Patient" constraintName="FK_qik03xqjt6q412ysc29uojvb0" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduserr" referencedTableName="Iuser"/>
+    </changeSet>
+</databaseChangeLog>
