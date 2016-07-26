@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -45,6 +46,9 @@ public class Grupo implements Serializable{
         @JoinColumn(name = "item", referencedColumnName = "iditem", nullable = false)})
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Item> items;
+    
+    @OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY)
+    private List<Utilizador> utilizadores;
 
     public Grupo() {
     }
@@ -79,6 +83,14 @@ public class Grupo implements Serializable{
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public List<Utilizador> getUtilizadores() {
+        return utilizadores;
+    }
+
+    public void setUtilizadores(List<Utilizador> utilizadores) {
+        this.utilizadores = utilizadores;
     }
     
     

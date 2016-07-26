@@ -4,14 +4,12 @@
  */
 package com.sgm.commands;
 
+import com.sgm.model.Utilizador;
 import com.sgm.service.RepositoryService;
-import static com.sun.facelets.util.Path.context;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.primefaces.component.inputtext.InputText;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,11 +24,13 @@ public class P_uController implements Serializable {
     @Autowired
     private RepositoryService csimp;
 
+    private String username;
+    private String password;
     private String fullname;
     private String email;
     private String phone;
     private String address;
-    private String username;
+
     private String isMale;
     //-----------------------assistant----------
     private String cardnumber;
@@ -46,12 +46,29 @@ public class P_uController implements Serializable {
     private String workplace;
     private String filiation;
 
-    //private List<Iuser> iusers;
+    private List<Utilizador> utilizadors;
     private String tselected;
 
-    private HashMap<String, Object> mapType=new HashMap<>();
-    
     public P_uController() {
+    }
+
+    public void guardar() throws Exception {
+        RequestContext context = RequestContext.getCurrentInstance();
+        Utilizador u = new Utilizador();
+
+        u.setEmail(email);
+        u.setPassword(password);
+        u.setUsername(username);
+        u.setTipo(1);
+        u.setFullname(fullname);
+        try {
+            csimp.create(u);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Guardado com Sucesso! ", "Guardado..."));
+         
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Falha no Registo! ", e.getLocalizedMessage()));
+        }
+        context.execute("PF('dlg2').hide();");
     }
 
     public String getTselected() {
@@ -61,19 +78,7 @@ public class P_uController implements Serializable {
     public void setTselected(String tselected) {
         this.tselected = tselected;
     }
-/*
-    public HashMap<String, Object> getMapType() {
-        for (Usertype u : csimp.findAll(Usertype.class)) {
-            mapType.put(u.getDesccription(), u);
-        }
-        return mapType;
-    }*/
 
-    public void setMapType(HashMap<String, Object> mapType) {
-        this.mapType = mapType;
-    }
-
-    
     public String getFullname() {
         return fullname;
     }
@@ -201,13 +206,21 @@ public class P_uController implements Serializable {
     public void setFiliation(String filiation) {
         this.filiation = filiation;
     }
-/*
-    public List<Iuser> getIusers() {
-        iusers = csimp.findAll(Iuser.class);
-        return iusers;
+
+    public List<Utilizador> getUtilizadors() {
+        return utilizadors;
     }
 
-    public void setIusers(List<Iuser> iusers) {
-        this.iusers = iusers;
-    }*/
+    public void setUtilizadors(List<Utilizador> utilizadors) {
+        this.utilizadors = utilizadors;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

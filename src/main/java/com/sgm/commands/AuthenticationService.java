@@ -5,6 +5,8 @@
  */
 package com.sgm.commands;
 
+import com.sgm.model.Item;
+import com.sgm.model.Utilizador;
 import com.sgm.service.RepositoryService;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class AuthenticationService implements Serializable{
     private List<String> images;
     private boolean loggedIn;
     private MenuModel menuModel;
-    //private Iuser user;
+    private Utilizador utilizador;
 
     public AuthenticationService() {
     }
@@ -76,23 +78,23 @@ public class AuthenticationService implements Serializable{
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "login";
     }
-/*
+
     public MenuModel getMenuModel() {
         menuModel = new DefaultMenuModel();
 
-        DefaultSubMenu firstSubmenu = new DefaultSubMenu(user.getGroup().getDescription());
-        for (Userole role: user.getGroup().getRoles()) {
+        DefaultSubMenu firstSubmenu = new DefaultSubMenu(utilizador.getGrupo().getDescription());
+        for (Item item: utilizador.getGrupo().getItems()) {
 
-            DefaultMenuItem itemm = new DefaultMenuItem(role.getItem().getNamevalue());
-            itemm.setUrl(role.getItem().getUrl());
-            itemm.setIcon(role.getItem().getIcon());
-            itemm.setTarget(role.getItem().getTarget());
+            DefaultMenuItem itemm = new DefaultMenuItem(item.getNameValue());
+            itemm.setUrl(item.getUrl());
+            itemm.setIcon(item.getIcon());
+            itemm.setTarget(item.getTarget());
             firstSubmenu.addElement(itemm);
         }
         menuModel.addElement(firstSubmenu);
         return menuModel;
-    }*/
-    /*
+    }
+    
     public String login() throws Exception {
 
         RequestContext context = RequestContext.getCurrentInstance();
@@ -106,25 +108,25 @@ public class AuthenticationService implements Serializable{
             return "login";
 
         } else {
-            Map<String, Object> todo = new HashMap<String, Object>();
+            /*Map<String, Object> todo = new HashMap<String, Object>();
             todo.put("username", username);
             todo.put("password", password);
-            user = null;
-            //List users = csimp.findByJPQuery("select aa from Iuser aa where aa.username like ':username' and aa.password like ':password'", todo);
-            //Iuser user = csimp.GetUniqueEntityByNamedQuery("Utilizador.findUser", todo);
-            for (Iuser u : csimp.findAll(Iuser.class)) {
+            utilizador = null;
+            List users = csimp.findByJPQuery("select aa from Iuser aa where aa.username like ':username' and aa.password like ':password'", todo);
+            Iuser user = csimp.GetUniqueEntityByNamedQuery("Utilizador.findUser", todo);*/
+            for (Utilizador u : csimp.findAll(Utilizador.class)) {
                 if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                      user = u;  
+                      utilizador = u;  
                       break;
                 }
             }
 
-            if (user != null) {
-                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem Vindo " + user.getEmail(), username);
+            if (utilizador != null) {
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem Vindo " + utilizador.getFullname(), username);
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 loggedIn = true;
                 HttpSession session=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-                session.setAttribute("utilizador", user);
+                session.setAttribute("utilizador", utilizador);
                 
                 return "homepage";
             }
@@ -137,7 +139,7 @@ public class AuthenticationService implements Serializable{
         
 
     }
-    */public List<String> getImages() {
+    public List<String> getImages() {
         images = new ArrayList<>();
         for (int i = 1; i <= 7; i++) {
             images.add("img" + i + ".jpg");

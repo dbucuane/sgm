@@ -26,20 +26,17 @@
                     </p:breadCrumb>
                     <p:commandButton style="margin:5px 0 5px 0;" value="Adicionar Utilizador" icon="ui-icon-plus" type="reset" onclick="PF('dlg2').show();"/>
 
-                    <p:dataTable id="dt1" var="user" value="#{p_uController.iusers}">
+                    <p:dataTable id="dt1" var="utilizador" value="#{p_uController.utilizadors}">
                         <p:column headerText="Nome">
-                            <h:outputText value="#{user.fullname}"/>
+                            <h:outputText value="#{utilizador.fullname}"/>
                         </p:column>
 
                         <p:column headerText="UserName">
-                            <h:outputText value="#{user.username}"/>
+                            <h:outputText value="#{utilizador.username}"/>
                         </p:column>
 
-                        <p:column headerText="Tipo">
-                            <h:outputText value="#{user.type.desccription}"/>
-                        </p:column>
                         <p:column headerText="Nome do Grupo">
-                            <h:outputText value="#{user.group.description}"/>
+                            <h:outputText value="#{utilizador.grupo.description}"/>
                         </p:column>
                         
                     </p:dataTable>
@@ -50,32 +47,17 @@
                         <p:panelGrid columns="2">
                             <p:outputLabel for="usern" value="Username"/>
                             <p:inputText id="usern" value="#{p_uController.username}" size="60" />
+                            <p:outputLabel for="password" value="Password"/>
+                            <p:inputText id="password" value="#{p_uController.password}" size="60"/>
                             <p:outputLabel for="name" value="Nome Completo"/>
                             <p:inputText id="name" value="#{p_uController.fullname}" size="60"/>
                             <p:outputLabel for="email" value="Email"/>
                             <p:inputText id="email" value="#{p_uController.email}" size="60"/>
-                            <p:outputLabel for="conact" value="Contacto"/>
-                            <p:inputText id="conact" value="#{p_uController.phone}" size="60"/>
-                            <p:outputLabel for="adr" value="Endereco"/>
-                            <p:inputTextarea id="adr" value="#{p_uController.address}" cols="60"/>
-                            <p:outputLabel for="sex" value="Sexo"/>
-                            <p:selectOneMenu id="sex" value="#{p_uController.isMale}"  style="width:150px">
-
-                                <f:selectItem itemLabel="Masculino" itemValue="1" />
-                                <f:selectItem itemLabel="Feminino" itemValue="0" />
-
-                            </p:selectOneMenu>
-                            <p:outputLabel for="type" value="Tipo de Utilizador"/>
-                            <p:selectOneMenu id="type" value="#{p_uController.tselected}"  style="width:150px">
-
-                                <f:selectItem itemLabel="Seleccione Tipo... " itemValue="" noSelectionOption="true" />
-                                <f:selectItems value="#{p_uController.mapType}" />
-
-                            </p:selectOneMenu>
-                            <p:outputLabel for="type" value="Tipo de Utilizador" rendered="#{p_uController.tselected = 'Paciente'}"/>
                             
                         </p:panelGrid>    
-                            
+                        <p:commandButton style="margin:5px;" value="Guardar" update=":f1:dt1 growl" icon="ui-icon-disk" action="#{p_uController.guardar()}" process="@form"/>
+                        <p:commandButton style="margin:5px;" value="Cancelar" type="reset" onclick="PF('dlg2').hide();" icon="ui-icon-close"/>
+                        
                     </h:form>
                 </p:dialog>
                 
