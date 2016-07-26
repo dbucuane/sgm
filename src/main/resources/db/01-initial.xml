@@ -1,43 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet author="User (generated)" id="1468998950192-1">
-        <createTable tableName="Igroup">
-            <column autoIncrement="true" name="idgroup" type="INT">
-                <constraints primaryKey="true" primaryKeyName="IgroupPK"/>
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="user (generated)" id="1469533440607-1">
+        <createTable tableName="Grupo">
+            <column autoIncrement="true" name="idgrupo" type="INT">
+                <constraints primaryKey="true" primaryKeyName="GrupoPK"/>
             </column>
             <column name="description" type="VARCHAR(45)"/>
             <column name="obs" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="User (generated)" id="1468998950192-2">
+    <changeSet author="user (generated)" id="1469533440607-2">
         <createTable tableName="Item">
             <column autoIncrement="true" name="iditem" type="INT">
                 <constraints primaryKey="true" primaryKeyName="ItemPK"/>
             </column>
             <column name="command" type="VARCHAR(255)"/>
             <column name="icon" type="VARCHAR(255)"/>
-            <column name="namevalue" type="VARCHAR(45)"/>
+            <column name="nameValue" type="VARCHAR(45)"/>
             <column name="target" type="VARCHAR(255)"/>
             <column name="url" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="User (generated)" id="1468998950192-3">
-        <createTable tableName="Iuser">
-            <column autoIncrement="true" name="iduserr" type="INT">
-                <constraints primaryKey="true" primaryKeyName="IuserPK"/>
+    <changeSet author="user (generated)" id="1469533440607-3">
+        <createTable tableName="Utilizador">
+            <column autoIncrement="true" name="iduser" type="INT">
+                <constraints primaryKey="true" primaryKeyName="UtilizadorPK"/>
             </column>
             <column name="email" type="VARCHAR(45)"/>
+            <column name="fullname" type="VARCHAR(45)"/>
             <column name="lastaccess" type="datetime"/>
             <column name="password" type="VARCHAR(45)"/>
+            <column name="tipo" type="INT">
+                <constraints nullable="false"/>
+            </column>
             <column name="username" type="VARCHAR(45)"/>
-            <column name="group" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="User (generated)" id="1468998950192-4">
-        <createTable tableName="Userole">
-            <column name="group" type="INT">
+    <changeSet author="user (generated)" id="1469533440607-4">
+        <createTable tableName="role">
+            <column name="grupo" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="item" type="INT">
@@ -45,18 +48,13 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="User (generated)" id="1468998950192-5">
-        <addPrimaryKey columnNames="group, item" constraintName="UserolePK" tableName="Userole"/>
+    <changeSet author="user (generated)" id="1469533440607-5">
+        <addPrimaryKey columnNames="grupo, item" constraintName="rolePK" tableName="role"/>
     </changeSet>
-    <changeSet author="User (generated)" id="1468998950192-6">
-        <addForeignKeyConstraint baseColumnNames="item" baseTableName="Userole" constraintName="FK_hml90f3d0qy9bc1tdmkrlpwtc" deferrable="false" initiallyDeferred="false" referencedColumnNames="iditem" referencedTableName="Item"/>
+    <changeSet author="user (generated)" id="1469533440607-6">
+        <addForeignKeyConstraint baseColumnNames="grupo" baseTableName="role" constraintName="FK_cndromv5l34x30xics7t91exy" deferrable="false" initiallyDeferred="false" referencedColumnNames="idgrupo" referencedTableName="Grupo"/>
     </changeSet>
-    <changeSet author="User (generated)" id="1468998950192-7">
-        <addForeignKeyConstraint baseColumnNames="group" baseTableName="Userole" constraintName="FK_jetrdgra0vjdtvqeogm42b4dl" deferrable="false" initiallyDeferred="false" referencedColumnNames="idgroup" referencedTableName="Igroup"/>
+    <changeSet author="user (generated)" id="1469533440607-7">
+        <addForeignKeyConstraint baseColumnNames="item" baseTableName="role" constraintName="FK_ku7wiqeih97aj5s3124dd381b" deferrable="false" initiallyDeferred="false" referencedColumnNames="iditem" referencedTableName="Item"/>
     </changeSet>
-    <changeSet author="User (generated)" id="1468998950192-8">
-        <addForeignKeyConstraint baseColumnNames="group" baseTableName="Iuser" constraintName="FK_s2h3euf0yop62q78ijlq45ktr" deferrable="false" initiallyDeferred="false" referencedColumnNames="idgroup" referencedTableName="Igroup"/>
-    </changeSet>
-    
-    
 </databaseChangeLog>

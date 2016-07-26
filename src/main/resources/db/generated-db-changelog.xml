@@ -1,53 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="User (generated)" id="1469448883257-1">
-        <addColumn tableName="Iuser">
-            <column name="fullname" type="varchar(45)"/>
-        </addColumn>
+    <changeSet author="user (generated)" id="1469533440607-1">
+        <createTable tableName="Grupo">
+            <column autoIncrement="true" name="idgrupo" type="INT">
+                <constraints primaryKey="true" primaryKeyName="GrupoPK"/>
+            </column>
+            <column name="description" type="VARCHAR(45)"/>
+            <column name="obs" type="VARCHAR(255)"/>
+        </createTable>
     </changeSet>
-    <changeSet author="User (generated)" id="1469448883257-2">
-        <addColumn tableName="Assistant">
-            <column name="iduserr_iduserr" type="integer">
+    <changeSet author="user (generated)" id="1469533440607-2">
+        <createTable tableName="Item">
+            <column autoIncrement="true" name="iditem" type="INT">
+                <constraints primaryKey="true" primaryKeyName="ItemPK"/>
+            </column>
+            <column name="command" type="VARCHAR(255)"/>
+            <column name="icon" type="VARCHAR(255)"/>
+            <column name="nameValue" type="VARCHAR(45)"/>
+            <column name="target" type="VARCHAR(255)"/>
+            <column name="url" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1469533440607-3">
+        <createTable tableName="Utilizador">
+            <column autoIncrement="true" name="iduser" type="INT">
+                <constraints primaryKey="true" primaryKeyName="UtilizadorPK"/>
+            </column>
+            <column name="email" type="VARCHAR(45)"/>
+            <column name="fullname" type="VARCHAR(45)"/>
+            <column name="lastaccess" type="datetime"/>
+            <column name="password" type="VARCHAR(45)"/>
+            <column name="tipo" type="INT">
                 <constraints nullable="false"/>
             </column>
-        </addColumn>
+            <column name="username" type="VARCHAR(45)"/>
+        </createTable>
     </changeSet>
-    <changeSet author="User (generated)" id="1469448883257-3">
-        <addColumn tableName="Doctor">
-            <column name="iduserr_iduserr" type="integer">
+    <changeSet author="user (generated)" id="1469533440607-4">
+        <createTable tableName="role">
+            <column name="grupo" type="INT">
                 <constraints nullable="false"/>
             </column>
-        </addColumn>
-    </changeSet>
-    <changeSet author="User (generated)" id="1469448883257-4">
-        <addColumn tableName="Patient">
-            <column name="iduserr_iduserr" type="integer">
+            <column name="item" type="INT">
                 <constraints nullable="false"/>
             </column>
-        </addColumn>
+        </createTable>
     </changeSet>
-    <changeSet author="User (generated)" id="1469448883257-5">
-        <dropColumn columnName="iduserr" tableName="assistant"/>
+    <changeSet author="user (generated)" id="1469533440607-5">
+        <addForeignKeyConstraint baseColumnNames="grupo" baseTableName="role" constraintName="FK_cndromv5l34x30xics7t91exy" deferrable="false" initiallyDeferred="false" referencedColumnNames="idgrupo" referencedTableName="Grupo"/>
     </changeSet>
-    <changeSet author="User (generated)" id="1469448883257-6">
-        <dropColumn columnName="iduserr" tableName="doctor"/>
-    </changeSet>
-    <changeSet author="User (generated)" id="1469448883257-7">
-        <dropColumn columnName="iduserr" tableName="patient"/>
-    </changeSet>
-    <changeSet author="User (generated)" id="1469448883257-8">
-        <dropNotNullConstraint columnDataType="boolean" columnName="isMale" tableName="Iuser"/>
-    </changeSet>
-    <changeSet author="User (generated)" id="1469448883257-9">
-        <dropPrimaryKey tableName="Assistant"/>
-        <addPrimaryKey columnNames="iduserr_iduserr" constraintName="AssistantPK" tableName="Assistant"/>
-    </changeSet>
-    <changeSet author="User (generated)" id="1469448883257-10">
-        <dropPrimaryKey tableName="Doctor"/>
-        <addPrimaryKey columnNames="iduserr_iduserr" constraintName="DoctorPK" tableName="Doctor"/>
-    </changeSet>
-    <changeSet author="User (generated)" id="1469448883257-11">
-        <dropPrimaryKey tableName="Patient"/>
-        <addPrimaryKey columnNames="iduserr_iduserr" constraintName="PatientPK" tableName="Patient"/>
+    <changeSet author="user (generated)" id="1469533440607-6">
+        <addForeignKeyConstraint baseColumnNames="item" baseTableName="role" constraintName="FK_ku7wiqeih97aj5s3124dd381b" deferrable="false" initiallyDeferred="false" referencedColumnNames="iditem" referencedTableName="Item"/>
     </changeSet>
 </databaseChangeLog>

@@ -8,7 +8,7 @@
     <packaging>war</packaging>
     <name>SGM</name>
     <properties>
-        <db.url>jdbc:mysql://localhost:3308/sgm</db.url>
+        <db.url>jdbc:mysql://localhost:3306/sgm</db.url>
         <db.driver>com.mysql.jdbc.Driver</db.driver>
         <db.username>root</db.username>
         <db.password>root</db.password>

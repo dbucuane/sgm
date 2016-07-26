@@ -4,8 +4,6 @@
  */
 package com.sgm.commands;
 
-import com.sgm.model.Iuser;
-import com.sgm.model.Usertype;
 import com.sgm.service.RepositoryService;
 import static com.sun.facelets.util.Path.context;
 import java.io.Serializable;
@@ -48,7 +46,7 @@ public class P_uController implements Serializable {
     private String workplace;
     private String filiation;
 
-    private List<Iuser> iusers;
+    //private List<Iuser> iusers;
     private String tselected;
 
     private HashMap<String, Object> mapType=new HashMap<>();
@@ -63,13 +61,13 @@ public class P_uController implements Serializable {
     public void setTselected(String tselected) {
         this.tselected = tselected;
     }
-
+/*
     public HashMap<String, Object> getMapType() {
         for (Usertype u : csimp.findAll(Usertype.class)) {
             mapType.put(u.getDesccription(), u);
         }
         return mapType;
-    }
+    }*/
 
     public void setMapType(HashMap<String, Object> mapType) {
         this.mapType = mapType;
@@ -203,7 +201,7 @@ public class P_uController implements Serializable {
     public void setFiliation(String filiation) {
         this.filiation = filiation;
     }
-
+/*
     public List<Iuser> getIusers() {
         iusers = csimp.findAll(Iuser.class);
         return iusers;
@@ -211,5 +209,5 @@ public class P_uController implements Serializable {
 
     public void setIusers(List<Iuser> iusers) {
         this.iusers = iusers;
-    }
+    }*/
 }

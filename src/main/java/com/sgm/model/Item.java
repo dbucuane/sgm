@@ -7,7 +7,6 @@ package com.sgm.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,13 +14,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 /**
  *
- * @author User
+ * @author user
  */
 @Entity
 @Table(catalog = "sgm", schema = "public")
@@ -34,7 +33,7 @@ public class Item implements Serializable{
     private Integer iditem;
     @Size(max = 45)
     @Column(length = 45)
-    private String namevalue;
+    private String nameValue;
     @Size(max = 255)
     @Column(length = 255)
     private String url;
@@ -47,10 +46,10 @@ public class Item implements Serializable{
     @Size(max = 255)
     @Column(length = 255)
     private String target;
-
-    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
-    private List<Userole> roles;
     
+    @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
+    private List<Grupo> grupos;
+
     public Item() {
     }
 
@@ -62,12 +61,12 @@ public class Item implements Serializable{
         this.iditem = iditem;
     }
 
-    public String getNamevalue() {
-        return namevalue;
+    public String getNameValue() {
+        return nameValue;
     }
 
-    public void setNamevalue(String namevalue) {
-        this.namevalue = namevalue;
+    public void setNameValue(String nameValue) {
+        this.nameValue = nameValue;
     }
 
     public String getUrl() {
@@ -102,49 +101,12 @@ public class Item implements Serializable{
         this.target = target;
     }
 
-    public List<Userole> getRoles() {
-        return roles;
+    public List<Grupo> getGrupos() {
+        return grupos;
     }
 
-    public void setRoles(List<Userole> roles) {
-        this.roles = roles;
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Item other = (Item) obj;
-        if (!Objects.equals(this.iditem, other.iditem)) {
-            return false;
-        }
-        if (!Objects.equals(this.namevalue, other.namevalue)) {
-            return false;
-        }
-        if (!Objects.equals(this.url, other.url)) {
-            return false;
-        }
-        if (!Objects.equals(this.icon, other.icon)) {
-            return false;
-        }
-        if (!Objects.equals(this.command, other.command)) {
-            return false;
-        }
-        if (!Objects.equals(this.target, other.target)) {
-            return false;
-        }
-        return true;
-    }
-    
     
 }

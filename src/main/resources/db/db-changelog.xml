@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <include file="src/main/resources/db/01-initial.xml"/>
-    <include file="src/main/resources/db/02-addAssistant.xml"/>
-    <include file="src/main/resources/db/03-change_isMale_type.xml"/>
-    <include file="src/main/resources/db/04-moretables.xml"/>
-    <include file="src/main/resources/db/05-addfullname.xml"/>
 </databaseChangeLog>
