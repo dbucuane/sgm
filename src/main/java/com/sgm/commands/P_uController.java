@@ -34,7 +34,7 @@ public class P_uController implements Serializable {
     private List<Utilizador> utilizadors;
     private String tselected;
     
-    private HashMap<String, Object> mapType=new HashMap<>();
+    private HashMap<String, Object> mapType;
     private String tipo;
 
     public P_uController() {
@@ -119,9 +119,11 @@ public class P_uController implements Serializable {
     }
 
     public HashMap<String, Object> getMapType() {
+        HashMap<String, Object> map=new HashMap<>();
         for (Grupo grupo : csimp.findAll(Grupo.class)) {
-            mapType.put(grupo.getDescription(), grupo);
+            map.put(grupo.getDescription(), grupo);
         }
+        mapType = map;
         return mapType;
     }
 

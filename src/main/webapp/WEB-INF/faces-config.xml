@@ -29,5 +29,10 @@
         <managed-bean-class>com.sgm.commands.P_gController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>consultaPController</managed-bean-name>
+        <managed-bean-class>com.sgm.commands.ConsultaPController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
 </faces-config>

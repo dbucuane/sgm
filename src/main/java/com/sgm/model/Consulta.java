@@ -35,9 +35,10 @@ public class Consulta implements Serializable{
     private Integer idconsulta;
    
     private Date dataconsulta;
-    @Size(max = 45)
-    @Column(length = 45)
-    private String especialidade;
+    
+    @JoinColumn(name = "especialidade", referencedColumnName = "idespecialidade")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Especialidade especialidade;
     
     @Size(max = 45)
     @Column(length = 45)
@@ -74,11 +75,11 @@ public class Consulta implements Serializable{
         this.dataconsulta = dataconsulta;
     }
 
-    public String getEspecialidade() {
+    public Especialidade getEspecialidade() {
         return especialidade;
     }
 
-    public void setEspecialidade(String especialidade) {
+    public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
     }
 

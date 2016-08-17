@@ -14,7 +14,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -25,30 +24,30 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(catalog = "sgm", schema = "public")
-public class Estado implements Serializable{
+public class Especialidade implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
-    private Integer idestado;           //marcada, cancelada, realizada, etc.
+    private Integer idespecialidade;
     
     @Size(max = 45)
     @Column(length = 45)
-    private String description;  
+    private String description;
 
-    @OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "especialidade", fetch = FetchType.LAZY)
     private List<Consulta> consultas;
     
-    public Estado() {
+    public Especialidade() {
     }
 
-    public Integer getIdestado() {
-        return idestado;
+    public Integer getIdespecialidade() {
+        return idespecialidade;
     }
 
-    public void setIdestado(Integer idestado) {
-        this.idestado = idestado;
+    public void setIdespecialidade(Integer idespecialidade) {
+        this.idespecialidade = idespecialidade;
     }
 
     public String getDescription() {
@@ -71,6 +70,6 @@ public class Estado implements Serializable{
     public String toString() {
         return description;
     }
-
+    
     
 }

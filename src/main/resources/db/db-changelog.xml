@@ -5,4 +5,5 @@
     <include file="src/main/resources/db/01-initial.xml"/>
     <include file="src/main/resources/db/02-heritagetables.xml"/>
     <include file="src/main/resources/db/03-consultacy.xml"/>
+    <include file="src/main/resources/db/04-addespecialidadeToconsultacy.xml"/>
 </databaseChangeLog>

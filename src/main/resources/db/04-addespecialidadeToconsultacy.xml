@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
     <changeSet author="user (generated)" id="1471365134649-1">
+        <dropColumn columnName="especialidade" tableName="Consulta"/>
+    </changeSet>
+    
+    <changeSet author="user (generated)" id="1471365134649-2">
+        <addColumn tableName="Consulta">
+            <column name="especialidade" type="INT"/>
+        </addColumn>
+    </changeSet>
+    
+    <changeSet author="user (generated)" id="1471365134649-3">
         <createTable tableName="Especialidade">
             <column autoIncrement="true" name="idespecialidade" type="INT">
                 <constraints primaryKey="true" primaryKeyName="EspecialidadePK"/>
@@ -8,10 +21,8 @@
             <column name="description" type="VARCHAR(45)"/>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1471365134649-2">
+    <changeSet author="user (generated)" id="1471365134649-4">
         <addForeignKeyConstraint baseColumnNames="especialidade" baseTableName="Consulta" constraintName="FK_d5d0mct3flo8tvjdo26s4nmci" deferrable="false" initiallyDeferred="false" referencedColumnNames="idespecialidade" referencedTableName="Especialidade"/>
     </changeSet>
-    <changeSet author="user (generated)" id="1471365134649-3">
-        <dropPrimaryKey constraintName="PRIMARY" tableName="role"/>
-    </changeSet>
+    
 </databaseChangeLog>

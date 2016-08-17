@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
@@ -29,7 +30,7 @@ import org.springframework.stereotype.Controller;
  * @author User
  */
 @Controller
-public class AuthenticationService implements Serializable{
+public class AuthenticationService implements Serializable {
 
     @Autowired
     private RepositoryService csimp;
@@ -67,7 +68,7 @@ public class AuthenticationService implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public void opendialog() {
         RequestContext context = RequestContext.getCurrentInstance();
         context.execute("PF('dialog1').show();");
@@ -83,7 +84,7 @@ public class AuthenticationService implements Serializable{
         menuModel = new DefaultMenuModel();
 
         DefaultSubMenu firstSubmenu = new DefaultSubMenu(utilizador.getGrupo().getDescription());
-        for (Item item: utilizador.getGrupo().getItems()) {
+        for (Item item : utilizador.getGrupo().getItems()) {
 
             DefaultMenuItem itemm = new DefaultMenuItem(item.getNameValue());
             itemm.setUrl(item.getUrl());
@@ -94,7 +95,7 @@ public class AuthenticationService implements Serializable{
         menuModel.addElement(firstSubmenu);
         return menuModel;
     }
-    
+
     public String login() throws Exception {
 
         RequestContext context = RequestContext.getCurrentInstance();
@@ -109,15 +110,15 @@ public class AuthenticationService implements Serializable{
 
         } else {
             /*Map<String, Object> todo = new HashMap<String, Object>();
-            todo.put("username", username);
-            todo.put("password", password);
-            utilizador = null;
-            List users = csimp.findByJPQuery("select aa from Iuser aa where aa.username like ':username' and aa.password like ':password'", todo);
-            Iuser user = csimp.GetUniqueEntityByNamedQuery("Utilizador.findUser", todo);*/
+             todo.put("username", username);
+             todo.put("password", password);
+             utilizador = null;
+             List users = csimp.findByJPQuery("select aa from Iuser aa where aa.username like ':username' and aa.password like ':password'", todo);
+             Iuser user = csimp.GetUniqueEntityByNamedQuery("Utilizador.findUser", todo);*/
             for (Utilizador u : csimp.findAll(Utilizador.class)) {
                 if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                      utilizador = u;  
-                      break;
+                    utilizador = u;
+                    break;
                 }
             }
 
@@ -125,9 +126,13 @@ public class AuthenticationService implements Serializable{
                 message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem Vindo " + utilizador.getFullname(), username);
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 loggedIn = true;
-                HttpSession session=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+                HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
                 session.setAttribute("utilizador", utilizador);
-                
+
+                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+                Map<String, Object> sessionMap = externalContext.getSessionMap();
+                sessionMap.put("utilizador", utilizador);
+
                 return "homepage";
             }
             loggedIn = false;
@@ -136,9 +141,9 @@ public class AuthenticationService implements Serializable{
             return "login";
 
         }
-        
 
     }
+
     public List<String> getImages() {
         images = new ArrayList<>();
         for (int i = 1; i <= 7; i++) {
@@ -151,7 +156,7 @@ public class AuthenticationService implements Serializable{
     public void setImages(List<String> images) {
         this.images = images;
     }
-    
+
     public void editPassword() throws Exception {
         RequestContext context = RequestContext.getCurrentInstance();
         utilizador.setPassword(password);
