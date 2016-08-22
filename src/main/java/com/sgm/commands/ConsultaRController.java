@@ -13,10 +13,12 @@ import com.sgm.model.Medico;
 import com.sgm.model.Paciente;
 import com.sgm.model.Utilizador;
 import com.sgm.service.RepositoryService;
+import com.sun.xml.internal.ws.api.model.MEP;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
@@ -45,13 +47,15 @@ public class ConsultaRController implements Serializable {
     private String medico;
     private HashMap<String, Object> mapaciente = new HashMap<>();
     private String paciente;
+    
+    private boolean flag = false;
 
     public ConsultaRController() {
     }
 
     public void marcar() {
         RequestContext context = RequestContext.getCurrentInstance();
-        
+
         Consulta consulta = new Consulta();
         consulta.setEspecialidade((Especialidade) mapEsp.get(especialidade));
         consulta.setEstado(new Estado(1)); //Marcada
@@ -59,9 +63,9 @@ public class ConsultaRController implements Serializable {
         consulta.setMedico((Medico) mapmedico.get(medico));
         consulta.setDataconsulta(date1);
         consulta.setTipoconsulta(tipoconsulta);
-        
+
         try {
-                
+
             csimp.create(consulta);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Guardado com Sucesso! ", "Guardado..."));
 
@@ -71,7 +75,7 @@ public class ConsultaRController implements Serializable {
         context.execute("PF('dlg2').hide();");
     }
 
-    public void cancelar() {
+    public void cancelarConsulta() {
         RequestContext context = RequestContext.getCurrentInstance();
         if (selectedconsult != null) {
             selectedconsult.setEstado(new Estado(2));
@@ -104,8 +108,11 @@ public class ConsultaRController implements Serializable {
     }
 
     public List<Consulta> getConsultas() {
-
-        return csimp.findAll(Consulta.class);
+        if(!flag){
+            consultas = csimp.findAll(Consulta.class);
+            flag = false;
+        }
+        return consultas;
     }
 
     public void setConsultas(List<Consulta> consultas) {
@@ -184,6 +191,35 @@ public class ConsultaRController implements Serializable {
     }
 
     public void buscar() {
+        RequestContext context = RequestContext.getCurrentInstance();
+
+        if (radio.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Seleccione Item de Busca! ", "Guardado..."));
+        } else {
+            flag = true;
+            Map<String, Object> todo = new HashMap();
+            List list;
+            switch(radio){
+                case "Medico" : 
+                            todo.put("idmedico", ((Medico)mapmedico.get(medico)).getIduser().getIduser());
+                            list = csimp.findByJPQuery("select cc from Consulta cc where cc.medico.iduser.iduser = :idmedico", todo);
+                            consultas = list;
+                            break;
+                case "Especialidade" :
+                            todo.put("idesp", ((Especialidade)mapEsp.get(especialidade)).getIdespecialidade());
+                            list = csimp.findByJPQuery("select cc from Consulta cc where cc.especialidade.idespecialidade = :idesp", todo);
+                            consultas = list;
+                            break;
+                case "Data" :
+                            
+                default:
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Seleccione Item de Busca! ", "Guardado..."));
+                            break;
+            }
+            
+            
+        }
+
     }
 
     public String getTipoconsulta() {

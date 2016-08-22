@@ -82,7 +82,6 @@ public class AuthenticationService implements Serializable {
 
     public MenuModel getMenuModel() {
         menuModel = new DefaultMenuModel();
-        System.out.println("actualizou");
         DefaultSubMenu firstSubmenu = new DefaultSubMenu(utilizador.getGrupo().getDescription());
         for (Item item : utilizador.getGrupo().getItems()) {
 
@@ -101,7 +100,6 @@ public class AuthenticationService implements Serializable {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage message = null;
         loggedIn = false;
-        System.out.println("correu");
         if (username.isEmpty() || password.isEmpty()) {
             loggedIn = false;
             message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro: Dados Incompletos", "Dados Incompletos");
