@@ -23,19 +23,20 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(catalog = "sgm", schema = "public")
-public class Paciente implements Serializable{
+public class Paciente implements Serializable {
+
     @Id
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Utilizador iduser;
-    
+
     @Size(max = 45)
     @Column(length = 45)
     private String name;
-    
+
     @Size(max = 45)
     @Column(length = 45)
     private String nid;
-    
+
     @Size(max = 45)
     @Column(length = 45)
     private String profession;
@@ -57,12 +58,12 @@ public class Paciente implements Serializable{
     @Size(max = 45)
     @Column(length = 45)
     private String workplace;
-    
+
     @Column(nullable = false)
     private Integer sexo;     //1-male, 0-female
-    
+
     private Date birthdate;
-    
+
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
     private List<Consulta> consultas;
 
@@ -172,6 +173,10 @@ public class Paciente implements Serializable{
     public void setConsultas(List<Consulta> consultas) {
         this.consultas = consultas;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

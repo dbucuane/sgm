@@ -43,6 +43,10 @@ public class Estado implements Serializable{
     public Estado() {
     }
 
+    public Estado(Integer idestado) {
+        this.idestado = idestado;
+    }
+
     public Integer getIdestado() {
         return idestado;
     }

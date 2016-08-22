@@ -19,6 +19,7 @@
     <h:body>
 
         <p:layout fullPage="true">
+            
             <p:layoutUnit position="center" >
                 <h:form id="form1">
                     <p:breadCrumb>
@@ -45,11 +46,7 @@
                         <p:column headerText="Estado">
                             <h:outputText value="#{consulta.estado}" style="color:red;"/>
                         </p:column>
-                        <p:column style="width:32px;text-align: center">
-                            <p:commandButton update=":form3:groupDetail" oncomplete="PF('dlg3').show()" icon="ui-icon-search" title="View">
-                                <f:setPropertyActionListener value="#{consulta}" target="#{consultaPController.selectedconsult}" />
-                            </p:commandButton>
-                        </p:column>
+                        
                     </p:dataTable>
 
                 </h:form>
@@ -58,41 +55,26 @@
 
                         <p:growl id="growl" life="2000" />
                         <p:panelGrid columns="2" style="width:100%;">
-                            <p:outputLabel value="Especialidade"/>
+                            <p:outputLabel for="espec" value="Especialidade"/>
                             <p:selectOneMenu id="espec" value="#{consultaPController.especialidade}"  >
                                 <f:selectItem itemLabel="Seleccione Especialidade" itemValue="" noSelectionOption="true" />    
                                 <f:selectItems value="#{consultaPController.mapEsp}" />
-
                             </p:selectOneMenu>
-                            
+                            <p:outputLabel for="inline" value="Data"/>
+                            <p:calendar id="inline" value="#{consultaPController.date1}" showOn="button" />
+                            <p:outputLabel for="tipo" value="Tipo de Consulta"/>
+                            <p:inputText id="tipo" value="#{consultaPController.tipoconsulta}"/>    
+                            <p:outputLabel for="med" value="Medico (Se Tiver)"/>
+                            <p:selectOneMenu id="med" value="#{consultaPController.medico}"  >
+                                <f:selectItem itemLabel="Seleccione Medico" itemValue="" noSelectionOption="true" />    
+                                <f:selectItems value="#{consultaPController.mapmedico}" />
+                            </p:selectOneMenu>
                         </p:panelGrid>
                         <p:commandButton style="margin:5px;" value="Guardar" update=":form1:dtable growl" icon="ui-icon-disk" action="#{p_gController.guardar()}" process="@form"/>
                         <p:commandButton style="margin:5px;" value="Cancelar" onclick="PF('dlg2').hide();" icon="ui-icon-close"/>
 
                     </h:form>
                 </p:dialog>
-                <p:dialog header="Ver Grupo" widgetVar="dlg3" style="font-size: 14px;" >
-                    <h:form id="form3" >
-
-                        <p:growl id="growl" life="2000" />
-                        <p:outputPanel id="groupDetail" style="text-align:center; width:250px">
-                            <p:panelGrid  columns="2" rendered="#{not empty p_gController.selectedgroup}" columnClasses="label,value">
-
-                                <h:outputText value="Nome:"/>
-                                <h:outputText value="#{p_gController.selectedgroup.description}" />
-
-                                <h:outputText value="Obs" />
-                                <h:outputText value="#{p_gController.selectedgroup.obs}" />
-
-                                <h:outputText value="Itens:" />
-                                <ui:repeat value="#{p_gController.selectedgroup.items}" var="item">
-                                    <h:outputText value="#{item.nameValue}" style="display:block"/>
-                                </ui:repeat>
-                            </p:panelGrid>
-                        </p:outputPanel>
-                    </h:form>
-                </p:dialog>
-                
             </p:layoutUnit>
         </p:layout>
     </h:body>

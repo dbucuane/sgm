@@ -7,10 +7,12 @@ package com.sgm.commands;
 
 import com.sgm.model.Consulta;
 import com.sgm.model.Especialidade;
+import com.sgm.model.Medico;
 import com.sgm.model.Paciente;
 import com.sgm.model.Utilizador;
 import com.sgm.service.RepositoryService;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,10 +35,16 @@ public class ConsultaPController implements Serializable {
     private Paciente pacienteLoggado;
     private Consulta selectedconsult;
     private List<Consulta> consultas;
+    private Date date1;
+    private String tipoconsulta;
+    
     
     
     private HashMap<String, Object> mapEsp=new HashMap<>();
     private String especialidade;
+    private HashMap<String, Object> mapmedico=new HashMap<>();
+    private String medico;
+    
 
     public ConsultaPController() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -63,6 +71,14 @@ public class ConsultaPController implements Serializable {
 
     public void setConsultas(List<Consulta> consultas) {
         this.consultas = consultas;
+    }
+
+    public String getTipoconsulta() {
+        return tipoconsulta;
+    }
+
+    public void setTipoconsulta(String tipoconsulta) {
+        this.tipoconsulta = tipoconsulta;
     }
 
     public Paciente getPacienteLoggado() {
@@ -100,6 +116,47 @@ public class ConsultaPController implements Serializable {
 
     public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
+    }
+
+    public RepositoryService getCsimp() {
+        return csimp;
+    }
+
+    public void setCsimp(RepositoryService csimp) {
+        this.csimp = csimp;
+    }
+
+    public Date getDate1() {
+        return date1;
+    }
+
+    public void setDate1(Date date1) {
+        this.date1 = date1;
+    }
+
+    public HashMap<String, Object> getMapmedico() {
+        HashMap<String, Object> map=new HashMap<>();
+        for (Medico e : csimp.findAll(Medico.class)) {
+            map.put(e.getName(), e);
+        }
+        mapmedico = map;
+        return mapmedico;
+    }
+
+    public void setMapmedico(HashMap<String, Object> mapmedico) {
+        this.mapmedico = mapmedico;
+    }
+
+    public String getMedico() {
+        return medico;
+    }
+
+    public void setMedico(String medico) {
+        this.medico = medico;
+    }
+    
+    public void buscar(){
+    
     }
 
 }

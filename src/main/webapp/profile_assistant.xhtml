@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>Consultas - Recepsionista</title>
+        </f:facet>
+        <style>
+            *{
+                font-size: 14px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="west" size="234" header="Pesquisa de Consulta" collapsed="true" collapsible="true">
+                <div style="margin: 10px auto; text-align: center;" >
+                    <h:form id="formularioBusca">
+                        <br/>
+                        <p:outputPanel id="customPanel" style="margin-bottom:10px; border: 1px solid #ccc; width: 100%;">
+                            <p:selectOneRadio id="customRadio" value="#{consultaRController.radio}" layout="custom">
+                                <f:selectItem itemLabel="" itemValue="Medico" />
+                                <f:selectItem itemLabel="" itemValue="Especialidade" />
+                                <f:selectItem itemLabel="" itemValue="Data" />
+                            </p:selectOneRadio>
+
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:radioButton id="opt1" for="customRadio" itemIndex="0" />
+                                <p:selectOneMenu id="funcii" value="#{consultaRController.medico}" style="width:100%;">
+
+                                    <f:selectItem itemLabel="Medico... " itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{consultaRController.mapmedico}" />
+
+                                </p:selectOneMenu>
+
+                                <p:radioButton id="opt2" for="customRadio" itemIndex="1" />
+                                <p:selectOneMenu id="tpee" value="#{consultaRController.especialidade}" style="width:100%;" >
+
+                                    <f:selectItem itemLabel="Especialidade" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{consultaRController.mapEsp}" />
+
+                                </p:selectOneMenu>
+                                <p:radioButton id="opt3" for="customRadio" itemIndex="2" />
+                                <p:calendar id="inline" value="#{consultaRController.date1}" placeholder="Data" />
+                            </h:panelGrid>
+                        </p:outputPanel>
+                        <p:commandButton value="Buscar" actionListener="#{consultaRController.buscar()}"  process="@form"/>
+
+                    </h:form>
+
+                    <div align="center" style="margin-top:30px">
+                        <image src="img/searchIcon.png" width="130px" height="130px"/>
+                    </div>
+                </div>
+            </p:layoutUnit>
+            <p:layoutUnit position="center" >
+                <h:form id="form1">
+                    <p:breadCrumb>
+                        <p:menuitem value="Utilitarios" url="#"/>
+                        <p:menuitem value="Consultas" url="#"/>
+                    </p:breadCrumb>
+                    <p:commandButton style="margin:5px 0 5px 0;" value="Marcar Consulta" icon="ui-icon-plus" type="button" onclick="PF('dlg2').show();"/>
+
+
+                    <p:dataTable id="dtable" var="consulta" value="#{consultaRController.consultas}">
+                        <p:column headerText="Data">
+                            <h:outputText value="#{consulta.dataconsulta}"/>
+                        </p:column>
+
+                        <p:column headerText="Especialidade">
+                            <h:outputText value="#{consulta.especialidade}"/>
+                        </p:column>
+                        <p:column headerText="Tipo de Consulta">
+                            <h:outputText value="#{consulta.tipoconsulta}"/>
+                        </p:column>
+                        <p:column headerText="Medico">
+                            <h:outputText value="#{consulta.medico.name}"/>
+                        </p:column>
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{consulta.estado}" style="color:red;"/>
+                        </p:column>
+                        <p:column headerText="Cancelar">
+                            <p:commandButton update=":form3:groupDetail" oncomplete="PF('dlg3').show()" value="Cancelar">
+                                <f:setPropertyActionListener value="#{consulta}" target="#{consultaRController.selectedconsult}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
+                </h:form>
+                <p:dialog header="Cadastrar Consulta" widgetVar="dlg2" style="font-size: 14px;" width="500">
+                    <h:form id="form2" >
+
+                        <p:growl id="growl" life="2000" />
+                        <p:panelGrid columns="2" style="width:100%;">
+                            <p:outputLabel for="pac" value="Paciente"/>
+                            <p:selectOneMenu id="pac" value="#{consultaRController.paciente}"  >
+                                <f:selectItem itemLabel="Seleccione Paciente" itemValue="" noSelectionOption="true" />    
+                                <f:selectItems value="#{consultaRController.mapaciente}" />
+                            </p:selectOneMenu>
+                            <p:outputLabel for="espec" value="Especialidade"/>
+                            <p:selectOneMenu id="espec" value="#{consultaRController.especialidade}"  >
+                                <f:selectItem itemLabel="Seleccione Especialidade" itemValue="" noSelectionOption="true" />    
+                                <f:selectItems value="#{consultaRController.mapEsp}" />
+                            </p:selectOneMenu>
+                            <p:outputLabel for="inline" value="Data"/>
+                            <p:calendar id="inline" value="#{consultaRController.date1}" showOn="button" />
+                            <p:outputLabel for="tipo" value="Tipo de Consulta"/>
+                            <p:inputText id="tipo" value="#{consultaRController.tipoconsulta}"/>    
+                            <p:outputLabel for="med" value="Medico (Se Tiver)"/>
+                            <p:selectOneMenu id="med" value="#{consultaRController.medico}"  >
+                                <f:selectItem itemLabel="Seleccione Medico" itemValue="" noSelectionOption="true" />    
+                                <f:selectItems value="#{consultaRController.mapmedico}" />
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                        <p:commandButton style="margin:5px;" value="Guardar" update=":form1:dtable growl" icon="ui-icon-disk" action="#{consultaRController.marcar()}" process="@form"/>
+                        <p:commandButton style="margin:5px;" value="Cancelar" onclick="PF('dlg2').hide();" icon="ui-icon-close"/>
+
+                    </h:form>
+                </p:dialog>
+                <p:dialog header="Cancelar Consulta" widgetVar="dlg3" style="font-size: 14px;" >
+                    <h:form id="form3" >
+
+                        <p:growl id="growl" life="2000" />
+                        <p:outputPanel id="groupDetail" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty consultaRController.selectedconsult}" columnClasses="label,value">
+
+                                <h:outputText value="Tem a Certeza que pretende Cancelar a Consulta?" />
+                            </p:panelGrid>
+                        </p:outputPanel>
+                        <p:commandButton style="margin:5px;" value="Guardar" update=":form1:dtable growl" icon="ui-icon-disk" action="#{consultaRController.cancelar()}" process="@form"/>
+                        <p:commandButton style="margin:5px;" value="Cancelar" onclick="PF('dlg3').hide();" icon="ui-icon-close"/>
+
+                    </h:form>
+                </p:dialog>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+
