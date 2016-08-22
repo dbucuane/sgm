@@ -34,6 +34,7 @@ public class Consulta implements Serializable{
     @Column(nullable = false)
     private Integer idconsulta;
    
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataconsulta;
     
     @JoinColumn(name = "especialidade", referencedColumnName = "idespecialidade")

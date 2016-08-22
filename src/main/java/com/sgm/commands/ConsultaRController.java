@@ -15,6 +15,7 @@ import com.sgm.model.Utilizador;
 import com.sgm.service.RepositoryService;
 import com.sun.xml.internal.ws.api.model.MEP;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -211,7 +212,11 @@ public class ConsultaRController implements Serializable {
                             consultas = list;
                             break;
                 case "Data" :
-                            
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+                            todo.put("datec", date1);
+                            list = csimp.findByJPQuery("select cc from Consulta cc where DATE(cc.dataconsulta) = DATE(:datec)", todo);
+                            consultas = list;
+                            break;
                 default:
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Seleccione Item de Busca! ", "Guardado..."));
                             break;

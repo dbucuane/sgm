@@ -39,5 +39,10 @@
         <managed-bean-class>com.sgm.commands.ConsultaRController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>medicosController</managed-bean-name>
+        <managed-bean-class>com.sgm.MedicosController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
 </faces-config>
