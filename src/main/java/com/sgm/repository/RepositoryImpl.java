@@ -66,7 +66,7 @@ public class RepositoryImpl implements RepositoryDAO {
         int i = 0;
 
         for (Parameter param : q.getParameters()) {
-            q.setParameter(param, params[0]);
+            q.setParameter(param, params[i]);
             i++;
         }
 

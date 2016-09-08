@@ -8,7 +8,7 @@
     <h:head>
         <f:facet name="first">
             <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-            <title>Consultas - Paciente</title>
+            <title>Consultas - Medico</title>
         </f:facet>
         <style>
             *{
@@ -28,68 +28,57 @@
                     </p:breadCrumb>
                     <p:commandButton style="margin:5px 0 5px 0;" value="Marcar Consulta" icon="ui-icon-plus" type="button" onclick="PF('dlg2').show();"/>
 
-
-                    <p:dataTable id="dtable" var="consulta" value="#{consultaPController.consultas}">
+                    <p:dataTable id="dtable" var="consulta" value="#{p_mController.consultas}">
                         <p:column headerText="Data">
                             <h:outputText value="#{consulta.dataconsulta}"/>
                         </p:column>
-
                         <p:column headerText="Especialidade">
                             <h:outputText value="#{consulta.especialidade}"/>
                         </p:column>
                         <p:column headerText="Tipo de Consulta">
                             <h:outputText value="#{consulta.tipoconsulta}"/>
                         </p:column>
-                        <p:column headerText="Medico">
-                            <h:outputText value="#{consulta.medico.name}"/>
-                        </p:column>
                         <p:column headerText="Estado">
                             <h:outputText value="#{consulta.estado}" style="color:red;"/>
                         </p:column>
-                        <p:column headerText="Cancelar">
-                            <p:commandButton rendered="#{consulta.estado.idestado != 6 and consulta.estado.idestado != 3}" update=":form3:groupDetail" oncomplete="PF('dlg3').show()" value="Cancelar">
-                                <f:setPropertyActionListener value="#{consulta}" target="#{consultaPController.selectedconsult}" />
+                        <p:column headerText="Iniciar">
+                            <p:commandButton update=":form1:dtable" oncomplete="PF('dlg3').show()" value="INICIAR">
+                                <f:setPropertyActionListener value="#{consulta}" target="#{p_mController.selectedconsult}" />
                             </p:commandButton>
                         </p:column>
+                        
                     </p:dataTable>
 
                 </h:form>
-                <p:dialog header="Marcar Consulta" widgetVar="dlg2" style="font-size: 14px;" width="500">
+                <p:dialog header="Agendar Consulta" widgetVar="dlg2" style="font-size: 14px;" width="500">
                     <h:form id="form2" >
 
                         <p:growl id="growl" life="2000" />
                         <p:panelGrid columns="2" style="width:100%;">
                             <p:outputLabel for="espec" value="Especialidade"/>
-                            <p:selectOneMenu id="espec" value="#{consultaPController.especialidade}"  >
+                            <p:selectOneMenu id="espec" value="#{p_mController.especialidade}"  >
                                 <f:selectItem itemLabel="Seleccione Especialidade" itemValue="" noSelectionOption="true" />    
-                                <f:selectItems value="#{consultaPController.mapEsp}" />
+                                <f:selectItems value="#{p_mController.mapEsp}" />
                             </p:selectOneMenu>
                             <p:outputLabel for="inline" value="Data"/>
-                            <p:calendar id="inline" value="#{consultaPController.date1}" showOn="button" />
+                            <p:calendar id="inline" value="#{p_mController.date1}" showOn="button" />
                             <p:outputLabel for="tipo" value="Tipo de Consulta"/>
-                            <p:inputText id="tipo" value="#{consultaPController.tipoconsulta}"/>    
-                            <p:outputLabel for="med" value="Medico (Se Tiver)"/>
-                            <p:selectOneMenu id="med" value="#{consultaPController.medico}"  >
-                                <f:selectItem itemLabel="Seleccione Medico" itemValue="" noSelectionOption="true" />    
-                                <f:selectItems value="#{consultaPController.mapmedico}" />
-                            </p:selectOneMenu>
+                            <p:inputText id="tipo" value="#{p_mController.tipoconsulta}"/>
                         </p:panelGrid>
-                        <p:commandButton style="margin:5px;" value="Guardar" update=":form1:dtable growl" icon="ui-icon-disk" action="#{consultaPController.marcar()}" process="@form"/>
+                        <p:commandButton style="margin:5px;" value="Guardar" update=":form1:dtable growl" icon="ui-icon-disk" action="#{p_mController.guardar()}" process="@form"/>
                         <p:commandButton style="margin:5px;" value="Cancelar" onclick="PF('dlg2').hide();" icon="ui-icon-close"/>
 
                     </h:form>
                 </p:dialog>
-                <p:dialog header="Cancelar Consulta" widgetVar="dlg3" style="font-size: 14px;" >
+                <p:dialog header="Iniciar Consulta" widgetVar="dlg3" style="font-size: 14px;" >
                     <h:form id="form3" >
 
                         <p:growl id="growl" life="2000" />
                         <p:outputPanel id="groupDetail" style="text-align:center;">
-                            <p:panelGrid  columns="2" rendered="#{not empty consultaPController.selectedconsult}" columnClasses="label,value">
-
-                                <h:outputText value="Tem a Certeza que pretende Cancelar a Consulta?" />
-                            </p:panelGrid>
+                            
+                            <h:outputText value="Tem a Certeza que pretende Iniciar a Consulta?" />
                         </p:outputPanel>
-                        <p:commandButton style="margin:5px;" value="Guardar" update=":form1:dtable growl" icon="ui-icon-disk" action="#{consultaPController.cancelarConsulta()}" process="@form"/>
+                        <p:commandButton style="margin:5px;" value="Guardar" update=":form1:dtable growl" icon="ui-icon-disk" action="#{p_mController.iniciarConsulta()}" process="@form"/>
                         <p:commandButton style="margin:5px;" value="Cancelar" onclick="PF('dlg3').hide();" icon="ui-icon-close"/>
 
                     </h:form>

@@ -11,6 +11,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -41,14 +43,18 @@ public class Medico implements Serializable{
     @Column(nullable = false)
     private Integer sexo;     //1-male, 0-female
     
-    @Size(max = 45)
-    @Column(length = 45)
-    private String specialty;
+    @JoinColumn(name = "especialidade", referencedColumnName = "idespecialidade")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Especialidade especialidade;
     
     @OneToMany(mappedBy = "medico", fetch = FetchType.LAZY)
     private List<Consulta> consultas;
 
     public Medico() {
+    }
+
+    public Medico(Utilizador iduser) {
+        this.iduser = iduser;
     }
 
     public Utilizador getIduser() {
@@ -75,14 +81,14 @@ public class Medico implements Serializable{
         this.email = email;
     }
 
-    public String getSpecialty() {
-        return specialty;
+    public Especialidade getEspecialidade() {
+        return especialidade;
     }
 
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
+    public void setEspecialidade(Especialidade especialidade) {
+        this.especialidade = especialidade;
     }
-
+    
     public String getCardnumber() {
         return cardnumber;
     }

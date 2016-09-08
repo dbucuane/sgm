@@ -41,8 +41,18 @@
     </managed-bean>
     <managed-bean>
         <managed-bean-name>medicosController</managed-bean-name>
-        <managed-bean-class>com.sgm.MedicosController</managed-bean-class>
+        <managed-bean-class>com.sgm.commands.MedicosController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>pacientesController</managed-bean-name>
+        <managed-bean-class>com.sgm.commands.PacientesController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>p_mController</managed-bean-name>
+        <managed-bean-class>com.sgm.commands.P_mController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
 </faces-config>

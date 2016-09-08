@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>Consulta - Medico</title>
+        </f:facet>
+        <style>
+            *{
+                font-size: 14px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="west" size="234" header="Consulta" collapsed="true" collapsible="true">
+                <div style="margin: 10% auto; text-align: center;" >
+                    <h:form id="formularioBusca">
+
+                        <p:commandButton update=":form1:dtable1" oncomplete="PF('dlg1').show()" value="Diagnostico" style="margin-bottom: 2%; width: 90%;"/>
+                        
+                        <p:commandButton update=":form1:dtable" oncomplete="PF('dlg2').show()" value="Prescrição Médica" style="margin-bottom: 2%; width: 90%;"/>
+                        
+                        <p:commandButton value="Consulta de Segmento" style="margin-bottom: 2%; width: 90%;"/>
+                        
+                        <p:commandButton value="Teste Laboratorial" style="margin-bottom: 2%; width: 90%;" />
+                        
+                        <p:commandButton value="Terminar Consulta" style="margin-bottom: 2%; width: 90%;"/>
+
+                    </h:form>
+
+                    <div align="center" style="margin-top:30px">
+                        <image src="img/searchIcon.png" width="130px" height="130px"/>
+                    </div>
+                </div>
+            </p:layoutUnit>
+            <p:layoutUnit position="center" >
+                <h:form id="form1">
+                    <p:panelGrid columns="2" style="width:40%;">
+                        <p:outputLabel for="name" value="Nome:"/>
+                        <h:outputText id="name" value="#{p_mController.selectedconsult.paciente.name}" />
+                        <p:outputLabel for="nid" value="NID"/>
+                        <h:outputText id="nid" value="#{p_mController.selectedconsult.paciente.nid}" />
+                        <p:outputLabel for="datan" value="Data de Nascimento:"/>
+                        <h:outputText id="datan" value="#{p_mController.selectedconsult.paciente.birthdate}" />
+                        <p:outputLabel for="Prof" value="Profissão:"/>
+                        <h:outputText id="Prof" value="#{p_mController.selectedconsult.paciente.profession}" />
+                        <p:outputLabel for="natu" value="Naturalidade:"/>
+                        <h:outputText id="natu" value="#{p_mController.selectedconsult.paciente.naturality}" />
+                        <p:outputLabel for="add" value="Endereço:"/>
+                        <h:outputText id="add" value="#{p_mController.selectedconsult.paciente.address}" />
+                    </p:panelGrid>
+                    
+                    <p:panelGrid id="pan1" style="margin-top:20px">
+                        <f:facet name="header">
+                            <p:row>
+                                <p:column colspan="8">Processo do Paciente</p:column>
+                            </p:row>
+                            <p:row >
+                                <p:column colspan="4">Dados Clínicos</p:column>
+                                <p:column colspan="4">Diagnósticos</p:column>
+                            </p:row>
+
+                        </f:facet>
+
+                        <p:row id="rw1">
+                            <p:column id="cl1" colspan="4" >
+                                
+                                <p:dataTable id="dtable" var="con" value="#{p_mController.consultasPaciente}">
+                                    <p:column headerText="Data" width="14%">
+                                        <h:outputText value="#{con.dataconsulta}"/>
+                                    </p:column>
+                                    <p:column headerText="Observações Clínicas" width="43%">
+                                        <h:outputText value="#{con.especialidade}"/>
+                                    </p:column>
+                                    <p:column headerText="Prescrições Terapêuticas" width="43%">
+                                        <h:outputText value="#{con.prescricoes}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                            </p:column>
+                            <p:column colspan="4" >
+                                <p:dataTable id="dtable1" var="diagnostico" value="#{p_mController.diagnosticos}">
+                                    <p:column headerText="Data" width="40%">
+                                        <h:outputText value="#{diagnostico.datadiagnostico}"/>
+                                    </p:column>
+                                    <p:column headerText="Diagnostico" width="60%">
+                                        <h:outputText value="#{diagnostico.description}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+
+                </h:form>
+                <p:dialog header="Efectuar Diagnóstico" widgetVar="dlg1" style="font-size: 14px;" width="500">
+                    <h:form id="form2" >
+
+                        <p:growl id="growl" life="2000" />
+                        <p:panelGrid columns="2" style="width:100%;">
+                            
+                            <p:outputLabel for="enf" value="Enfermidade"/>
+                            <p:inputText id="enf" value="#{p_mController.enfermidade}" style="width: 90%"/>
+                            <p:outputLabel for="desc" value="Descrição"/>
+                            <p:inputTextarea id="desc" value="#{p_mController.enfdescription}" style="width: 90%"/>
+                        </p:panelGrid>
+                        <p:commandButton style="margin:5px;" value="Guardar" update=":form1:dtable1 growl" action="#{p_mController.registarDiagnostico()}"  icon="ui-icon-disk"  process="@form"/>
+                        <p:commandButton style="margin:5px;" value="Cancelar" onclick="PF('dlg1').hide();" icon="ui-icon-close"/>
+
+                    </h:form>
+                </p:dialog>
+                <p:dialog header="Registar Prescrição" widgetVar="dlg2" style="font-size: 14px;" width="500">
+                    <h:form id="form3" >
+
+                        <p:growl id="growl" life="2000" />
+                        <p:panelGrid columns="2" style="width:100%;">
+                            
+                            <p:outputLabel for="desci" value="Dados da Prescição"/>
+                            <p:inputTextarea id="desci" value="#{p_mController.prescrições}" style="width: 90%"/>
+                        </p:panelGrid>
+                        <p:commandButton style="margin:5px;" value="Guardar" update=":form1:dtable growl" action="#{p_mController.registarPrescrição()}"  icon="ui-icon-disk"  process="@form"/>
+                        <p:commandButton style="margin:5px;" value="Cancelar" onclick="PF('dlg2').hide();" icon="ui-icon-close"/>
+
+                    </h:form>
+                </p:dialog>
+
+
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+

@@ -6,7 +6,7 @@
 package com.sgm.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,43 +14,47 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.validation.constraints.Size;
 
 /**
  *
  * @author user
  */
+
 @Entity
 @Table(catalog = "sgm", schema = "public")
-public class Especialidade implements Serializable{
+public class ExameLaboratorial implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
-    private Integer idespecialidade;
+    private Integer idexame;
     
     @Size(max = 45)
     @Column(length = 45)
     private String description;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataexamw;
+    
+    @JoinColumn(name = "paciente", referencedColumnName = "iduser_iduser")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Paciente paciente;
 
-    @OneToMany(mappedBy = "especialidade", fetch = FetchType.LAZY)
-    private List<Consulta> consultas;
-    
-    @OneToMany(mappedBy = "especialidade", fetch = FetchType.LAZY)
-    private List<Medico> medicos;
-    
-    public Especialidade() {
+    public ExameLaboratorial() {
     }
 
-    public Integer getIdespecialidade() {
-        return idespecialidade;
+    public Integer getIdexame() {
+        return idexame;
     }
 
-    public void setIdespecialidade(Integer idespecialidade) {
-        this.idespecialidade = idespecialidade;
+    public void setIdexame(Integer idexame) {
+        this.idexame = idexame;
     }
 
     public String getDescription() {
@@ -61,26 +65,22 @@ public class Especialidade implements Serializable{
         this.description = description;
     }
 
-    public List<Consulta> getConsultas() {
-        return consultas;
+    public Date getDataexamw() {
+        return dataexamw;
     }
 
-    public void setConsultas(List<Consulta> consultas) {
-        this.consultas = consultas;
+    public void setDataexamw(Date dataexamw) {
+        this.dataexamw = dataexamw;
     }
 
-    @Override
-    public String toString() {
-        return description;
+    public Paciente getPaciente() {
+        return paciente;
     }
 
-    public List<Medico> getMedicos() {
-        return medicos;
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
-
-    public void setMedicos(List<Medico> medicos) {
-        this.medicos = medicos;
-    }
+    
     
     
 }

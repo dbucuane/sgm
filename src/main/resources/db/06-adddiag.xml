@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <changeSet author="user (generated)" id="1472031421179-1">
+        <createTable tableName="Diagnostico">
+            <column autoIncrement="true" name="idiagnostico" type="INT">
+                <constraints primaryKey="true" primaryKeyName="DiagnosticoPK"/>
+            </column>
+            <column name="datadiagnostico" type="date"/>
+            <column name="description" type="VARCHAR(45)"/>
+            <column name="paciente" type="INT"/>
+            <column name="medico" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1472031421179-2">
+        <createTable tableName="ExameLaboratorial">
+            <column autoIncrement="true" name="idexame" type="INT">
+                <constraints primaryKey="true" primaryKeyName="ExameLaboratorialPK"/>
+            </column>
+            <column name="dataexamw" type="date"/>
+            <column name="description" type="VARCHAR(45)"/>
+            <column name="paciente" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1472031421179-3">
+        <addForeignKeyConstraint baseColumnNames="paciente" baseTableName="Diagnostico" constraintName="FK_f2lp3858rkjq3iv4bpfdn4nqr" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser_iduser" referencedTableName="Paciente"/>
+    </changeSet>
+    <changeSet author="user (generated)" id="1472031421179-4">
+        <addForeignKeyConstraint baseColumnNames="paciente" baseTableName="ExameLaboratorial" constraintName="FK_oxdhjosteg4viurglhfnxlfkt" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser_iduser" referencedTableName="Paciente"/>
+    </changeSet>
+    <changeSet author="user (generated)" id="1472031421179-5">
+        <addForeignKeyConstraint baseColumnNames="medico" baseTableName="Diagnostico" constraintName="FK_t9qy7khgj4ss33e3582xuw65y" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser_iduser" referencedTableName="Medico"/>
+    </changeSet>
+</databaseChangeLog>

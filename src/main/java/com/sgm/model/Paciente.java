@@ -66,6 +66,12 @@ public class Paciente implements Serializable {
 
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
     private List<Consulta> consultas;
+    
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    private List<Diagnostico> diagnosticos;
+    
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    private List<ExameLaboratorial> exameLaboratorials;
 
     public Paciente() {
     }
@@ -172,6 +178,22 @@ public class Paciente implements Serializable {
 
     public void setConsultas(List<Consulta> consultas) {
         this.consultas = consultas;
+    }
+
+    public List<Diagnostico> getDiagnosticos() {
+        return diagnosticos;
+    }
+
+    public void setDiagnosticos(List<Diagnostico> diagnosticos) {
+        this.diagnosticos = diagnosticos;
+    }
+
+    public List<ExameLaboratorial> getExameLaboratorials() {
+        return exameLaboratorials;
+    }
+
+    public void setExameLaboratorials(List<ExameLaboratorial> exameLaboratorials) {
+        this.exameLaboratorials = exameLaboratorials;
     }
 
     @Override

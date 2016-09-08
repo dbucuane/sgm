@@ -7,6 +7,7 @@ package com.sgm.commands;
 
 import com.sgm.model.Consulta;
 import com.sgm.model.Especialidade;
+import com.sgm.model.Estado;
 import com.sgm.model.Medico;
 import com.sgm.model.Paciente;
 import com.sgm.model.Utilizador;
@@ -16,9 +17,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -56,6 +59,44 @@ public class ConsultaPController implements Serializable {
         }else{
             pacienteLoggado = null;
         }
+    }
+    
+    public void marcar() {
+        RequestContext context = RequestContext.getCurrentInstance();
+
+        Consulta consulta = new Consulta();
+        consulta.setEspecialidade((Especialidade) mapEsp.get(especialidade));
+        consulta.setEstado(new Estado(1)); //Marcada
+        consulta.setPaciente(pacienteLoggado);
+        consulta.setMedico((Medico) mapmedico.get(medico));
+        consulta.setDataconsulta(date1);
+        consulta.setTipoconsulta(tipoconsulta);
+
+        try {
+
+            csimp.create(consulta);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Guardado com Sucesso! ", "Guardado..."));
+
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Falha no Registo! ", e.getLocalizedMessage()));
+        }
+        context.execute("PF('dlg2').hide();");
+    }
+    
+    public void cancelarConsulta() {
+        RequestContext context = RequestContext.getCurrentInstance();
+        if (selectedconsult != null) {
+            selectedconsult.setEstado(new Estado(3));
+
+            try {
+                csimp.edit(selectedconsult);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cancelada com Sucesso! ", "Guardado..."));
+
+            } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Falha ao cancelar! ", e.getLocalizedMessage()));
+            }
+        }
+        context.execute("PF('dlg3').hide();");
     }
 
     public List<Consulta> getConsultas() {

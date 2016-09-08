@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e7a52780-3cf3-4f60-857f-a75f3ab6c907">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="medico" class="java.lang.String"/>
+	<field name="especialidade" class="java.lang.String"/>
+	<field name="paciente" class="java.lang.String"/>
+	<field name="dataconsulta" class="java.util.Date"/>
+	<field name="tipoconsulta" class="java.lang.String"/>
+	<field name="estado" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="2" width="387" height="36" forecolor="#C1D6D8" backcolor="#E3E3E3" uuid="ebcc3c67-6abc-42a5-87d7-a79fc57d9108"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="292" height="20" forecolor="#333333" uuid="12508dbb-f7a6-47a1-882c-a41e6ef71265"/>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SGM - Consultório Samona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="292" height="18" forecolor="#999999" uuid="920a6368-35aa-4577-af9a-bcdcaae0dbeb"/>
+				<text><![CDATA[Sistema de Gestão de Consultas Médicas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="669" y="0" width="33" height="20" uuid="0f7bad15-ac51-41b7-8036-3f9e860f4a3d"/>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="669" y="20" width="33" height="20" uuid="dcd38152-5f07-4db1-a63f-bd85d017d9ea"/>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField pattern="h.mm a">
+				<reportElement x="702" y="20" width="100" height="20" uuid="d5d1a4fa-f48c-45f7-be0c-6432574626e1"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="702" y="0" width="100" height="20" uuid="313028b4-6e6c-4d01-b802-b1e91eaa9f33"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="256" height="20" forecolor="#333333" uuid="3f0eac8b-de4e-4ddc-8d9d-b6d3ff2e40c7"/>
+				<textElement>
+					<font size="14" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Lista de Consultas por Médico]]></text>
+			</staticText>
+			<line>
+				<reportElement x="240" y="26" width="359" height="1" uuid="f6bec821-2299-421b-b4ba-5609bd748ee9"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="10" width="181" height="20" forecolor="#000000" backcolor="#CCCCFF" uuid="8beb0f59-5367-4039-8039-c11eae75c302"/>
+				<text><![CDATA[medico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="182" y="10" width="134" height="20" backcolor="#CCCCFF" uuid="fe215a11-531c-4518-b562-7a50f21bfe96"/>
+				<text><![CDATA[especialidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="320" y="10" width="182" height="20" backcolor="#CCCCFF" uuid="f31db74c-6ac5-40c9-a5ad-0e281168f40a"/>
+				<text><![CDATA[paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="504" y="10" width="114" height="20" backcolor="#CCCCFF" uuid="ee66492d-4168-472d-bd01-85c19bbc5d3f"/>
+				<text><![CDATA[dataconsulta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="621" y="10" width="98" height="20" backcolor="#CCCCFF" uuid="4faacd69-8e3b-4ef8-a6f8-cd2fc249a05a"/>
+				<text><![CDATA[tipoconsulta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="721" y="10" width="80" height="20" backcolor="#CCCCFF" uuid="9ff79e2b-d0a5-4cdd-a031-c37882fea39f"/>
+				<text><![CDATA[estado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="181" height="20" uuid="afdbb316-56e0-4527-b8f2-1303955695a8"/>
+				<textFieldExpression><![CDATA[$F{medico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="0" width="134" height="20" uuid="9d689f41-b9b0-4a10-9b59-6c6798d7e7fb"/>
+				<textFieldExpression><![CDATA[$F{especialidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="0" width="182" height="20" uuid="30d3553b-8110-4d5b-ba90-848f233d6794"/>
+				<textFieldExpression><![CDATA[$F{paciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="504" y="0" width="114" height="20" uuid="71afc9f6-3fe4-4779-b052-6610f7da080d"/>
+				<textFieldExpression><![CDATA[$F{dataconsulta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="621" y="0" width="98" height="20" uuid="b5e85d7c-6355-4d61-b9b2-c1774b8317c5"/>
+				<textFieldExpression><![CDATA[$F{tipoconsulta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="721" y="0" width="80" height="20" uuid="a17d2141-f7c1-45ec-a5e3-66da32c01d1c"/>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="17" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="13" forecolor="#CCCCFF" backcolor="#CCCCFF" uuid="cc1ce955-ac51-4da9-8f6c-23f0f61bcbc4"/>
+			</rectangle>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="761" y="0" width="41" height="20" uuid="1255bd2f-c0f4-44d5-af30-7029ef06fac2"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="684" y="0" width="77" height="20" uuid="63c0e05e-c6f1-45a5-a0a9-6b6fe128959a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="5" splitType="Stretch"/>
+	</summary>
+</jasperReport>
