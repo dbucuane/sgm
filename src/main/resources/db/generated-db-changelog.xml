@@ -1,11 +1,200 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="user (generated)" id="1473273863426-1">
-        <addColumn tableName="Consulta">
-            <column name="ctime" type="varchar(45)"/>
-        </addColumn>
+    <changeSet author="User (generated)" id="1477763416615-1">
+        <createTable tableName="Consulta">
+            <column autoIncrement="true" name="idconsulta" type="INT">
+                <constraints primaryKey="true" primaryKeyName="ConsultaPK"/>
+            </column>
+            <column name="ctime" type="VARCHAR(45)"/>
+            <column name="dataconsulta" type="date"/>
+            <column name="prescricoes" type="VARCHAR(45)"/>
+            <column name="tipoconsulta" type="VARCHAR(45)"/>
+            <column name="especialidade" type="INT"/>
+            <column name="estado" type="INT"/>
+            <column name="paciente" type="INT"/>
+            <column name="medico" type="INT"/>
+        </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1473273863426-2">
-        <dropPrimaryKey constraintName="PRIMARY" tableName="role"/>
+    <changeSet author="User (generated)" id="1477763416615-2">
+        <createTable tableName="Diagnostico">
+            <column autoIncrement="true" name="idiagnostico" type="INT">
+                <constraints primaryKey="true" primaryKeyName="DiagnosticoPK"/>
+            </column>
+            <column name="datadiagnostico" type="date"/>
+            <column name="description" type="VARCHAR(45)"/>
+            <column name="paciente" type="INT"/>
+            <column name="medico" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-3">
+        <createTable tableName="Especialidade">
+            <column autoIncrement="true" name="idespecialidade" type="INT">
+                <constraints primaryKey="true" primaryKeyName="EspecialidadePK"/>
+            </column>
+            <column name="description" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-4">
+        <createTable tableName="Estado">
+            <column autoIncrement="true" name="idestado" type="INT">
+                <constraints primaryKey="true" primaryKeyName="EstadoPK"/>
+            </column>
+            <column name="description" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-5">
+        <createTable tableName="ExameLaboratorial">
+            <column autoIncrement="true" name="idexame" type="INT">
+                <constraints primaryKey="true" primaryKeyName="ExameLaboratorialPK"/>
+            </column>
+            <column name="dataexamw" type="date"/>
+            <column name="description" type="VARCHAR(45)"/>
+            <column name="paciente" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-6">
+        <createTable tableName="Grupo">
+            <column autoIncrement="true" name="idgrupo" type="INT">
+                <constraints primaryKey="true" primaryKeyName="GrupoPK"/>
+            </column>
+            <column name="description" type="VARCHAR(45)"/>
+            <column name="obs" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-7">
+        <createTable tableName="Item">
+            <column autoIncrement="true" name="iditem" type="INT">
+                <constraints primaryKey="true" primaryKeyName="ItemPK"/>
+            </column>
+            <column name="command" type="VARCHAR(255)"/>
+            <column name="icon" type="VARCHAR(255)"/>
+            <column name="nameValue" type="VARCHAR(45)"/>
+            <column name="target" type="VARCHAR(255)"/>
+            <column name="url" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-8">
+        <createTable tableName="Medico">
+            <column name="cardnumber" type="VARCHAR(45)"/>
+            <column name="email" type="VARCHAR(45)"/>
+            <column name="name" type="VARCHAR(45)"/>
+            <column name="sexo" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="iduser_iduser" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="especialidade" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-9">
+        <createTable tableName="Paciente">
+            <column name="address" type="VARCHAR(45)"/>
+            <column name="birthdate" type="datetime"/>
+            <column name="contact" type="VARCHAR(45)"/>
+            <column name="maritalstatus" type="VARCHAR(45)"/>
+            <column name="name" type="VARCHAR(45)"/>
+            <column name="nationality" type="VARCHAR(45)"/>
+            <column name="naturality" type="VARCHAR(45)"/>
+            <column name="nid" type="VARCHAR(45)"/>
+            <column name="profession" type="VARCHAR(45)"/>
+            <column name="sexo" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="workplace" type="VARCHAR(45)"/>
+            <column name="iduser_iduser" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-10">
+        <createTable tableName="Recepsionista">
+            <column name="cardnumber" type="VARCHAR(45)"/>
+            <column name="email" type="VARCHAR(45)"/>
+            <column name="name" type="VARCHAR(45)"/>
+            <column name="sexo" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="iduser_iduser" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-11">
+        <createTable tableName="Utilizador">
+            <column autoIncrement="true" name="iduser" type="INT">
+                <constraints primaryKey="true" primaryKeyName="UtilizadorPK"/>
+            </column>
+            <column name="email" type="VARCHAR(45)"/>
+            <column name="fullname" type="VARCHAR(45)"/>
+            <column name="lastaccess" type="datetime"/>
+            <column name="password" type="VARCHAR(45)"/>
+            <column name="tipo" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(45)"/>
+            <column name="grupo" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-12">
+        <createTable tableName="role">
+            <column name="grupo" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="item" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-13">
+        <addPrimaryKey columnNames="iduser_iduser" constraintName="MedicoPK" tableName="Medico"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-14">
+        <addPrimaryKey columnNames="iduser_iduser" constraintName="PacientePK" tableName="Paciente"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-15">
+        <addPrimaryKey columnNames="iduser_iduser" constraintName="RecepsionistaPK" tableName="Recepsionista"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-16">
+        <addForeignKeyConstraint baseColumnNames="especialidade" baseTableName="Medico" constraintName="FK_2u6n6f6utwpyqejgb72rxckii" deferrable="false" initiallyDeferred="false" referencedColumnNames="idespecialidade" referencedTableName="Especialidade"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-17">
+        <addForeignKeyConstraint baseColumnNames="iduser_iduser" baseTableName="Medico" constraintName="FK_5txyq6soga98r6prn20b76b5d" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser" referencedTableName="Utilizador"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-18">
+        <addForeignKeyConstraint baseColumnNames="estado" baseTableName="Consulta" constraintName="FK_7rorqd6v94ed7u6d1b9kh1wlb" deferrable="false" initiallyDeferred="false" referencedColumnNames="idestado" referencedTableName="Estado"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-19">
+        <addForeignKeyConstraint baseColumnNames="iduser_iduser" baseTableName="Paciente" constraintName="FK_avamruppk4jy5046ww3l92mox" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser" referencedTableName="Utilizador"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-20">
+        <addForeignKeyConstraint baseColumnNames="iduser_iduser" baseTableName="Recepsionista" constraintName="FK_brbfl5vhsp7rcpjcqupnmadeq" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser" referencedTableName="Utilizador"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-21">
+        <addForeignKeyConstraint baseColumnNames="grupo" baseTableName="role" constraintName="FK_cndromv5l34x30xics7t91exy" deferrable="false" initiallyDeferred="false" referencedColumnNames="idgrupo" referencedTableName="Grupo"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-22">
+        <addForeignKeyConstraint baseColumnNames="especialidade" baseTableName="Consulta" constraintName="FK_d5d0mct3flo8tvjdo26s4nmci" deferrable="false" initiallyDeferred="false" referencedColumnNames="idespecialidade" referencedTableName="Especialidade"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-23">
+        <addForeignKeyConstraint baseColumnNames="paciente" baseTableName="Diagnostico" constraintName="FK_f2lp3858rkjq3iv4bpfdn4nqr" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser_iduser" referencedTableName="Paciente"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-24">
+        <addForeignKeyConstraint baseColumnNames="paciente" baseTableName="Consulta" constraintName="FK_koj53eccuq37ebtmhs6ugllu1" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser_iduser" referencedTableName="Paciente"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-25">
+        <addForeignKeyConstraint baseColumnNames="item" baseTableName="role" constraintName="FK_ku7wiqeih97aj5s3124dd381b" deferrable="false" initiallyDeferred="false" referencedColumnNames="iditem" referencedTableName="Item"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-26">
+        <addForeignKeyConstraint baseColumnNames="grupo" baseTableName="Utilizador" constraintName="FK_mnr12tqe0d4oka633j63501ie" deferrable="false" initiallyDeferred="false" referencedColumnNames="idgrupo" referencedTableName="Grupo"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-27">
+        <addForeignKeyConstraint baseColumnNames="paciente" baseTableName="ExameLaboratorial" constraintName="FK_oxdhjosteg4viurglhfnxlfkt" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser_iduser" referencedTableName="Paciente"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-28">
+        <addForeignKeyConstraint baseColumnNames="medico" baseTableName="Consulta" constraintName="FK_r9qnf06htv0kr6g037blcri67" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser_iduser" referencedTableName="Medico"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1477763416615-29">
+        <addForeignKeyConstraint baseColumnNames="medico" baseTableName="Diagnostico" constraintName="FK_t9qy7khgj4ss33e3582xuw65y" deferrable="false" initiallyDeferred="false" referencedColumnNames="iduser_iduser" referencedTableName="Medico"/>
     </changeSet>
 </databaseChangeLog>

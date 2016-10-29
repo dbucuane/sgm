@@ -10,4 +10,5 @@
     <include file="src/main/resources/db/06-adddiag.xml"/>
     <include file="src/main/resources/db/07-addpre.xml"/>
     <include file="src/main/resources/db/08-addtime.xml"/>
+    <include file="src/main/resources/db/09-loadata.xml"/>
 </databaseChangeLog>

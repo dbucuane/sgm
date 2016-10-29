@@ -1,0 +1,3 @@
+icon,nameValue,target,url
+ui-icon-home,Gerir Grupos,frame,/profile_group.jsf
+ui-icon-home,Gerir Utilizadores,frame,/profile_users.jsf

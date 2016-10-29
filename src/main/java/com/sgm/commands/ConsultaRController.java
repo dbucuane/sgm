@@ -33,7 +33,6 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import org.bouncycastle.mail.smime.util.FileBackedMimeBodyPart;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,16 +96,22 @@ public class ConsultaRController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Seleccione Item de Busca! ", "Guardado..."));
         } else {
             if (radio.equals("Medico")) {
+                
 
-                JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(consultas);
-                jasperPrint = JasperFillManager.fillReport(getPathToProject()+"/src/main/java/com/sgm/reports/ConsultasPormedico.jasper", new HashMap(), beanCollectionDataSource);
+                try {
+                    JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(consultas);
+                    jasperPrint = JasperFillManager.fillReport("C:\\Users\\user\\Documents\\NetBeansProjects\\sgm\\src\\main\\java\\com\\sgm\\reports\\ConsultasPormedico.jasper", new HashMap(), beanCollectionDataSource);
 
-                HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-                httpServletResponse.addHeader("Content-disposition", "attachment; filename=RelatorioEquipamentosPorFuncionario.pdf");
-                ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
-                JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
-                FacesContext.getCurrentInstance().responseComplete();
-                FacesContext.getCurrentInstance().renderResponse();
+                    HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+                    httpServletResponse.addHeader("Content-disposition", "attachment; filename=RelatorioEquipamentosPorFuncionario.pdf");
+                    ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+                    JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+                    FacesContext.getCurrentInstance().responseComplete();
+                    FacesContext.getCurrentInstance().renderResponse();
+                    System.out.println("tested");
+                } catch (JRException | IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 

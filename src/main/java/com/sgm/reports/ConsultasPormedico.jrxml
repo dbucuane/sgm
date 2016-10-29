@@ -3,12 +3,12 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<field name="medico" class="java.lang.String"/>
-	<field name="especialidade" class="java.lang.String"/>
-	<field name="paciente" class="java.lang.String"/>
+	<field name="medicor" class="java.lang.String"/>
+	<field name="especialidader" class="java.lang.String"/>
+	<field name="pacienter" class="java.lang.String"/>
 	<field name="dataconsulta" class="java.util.Date"/>
 	<field name="tipoconsulta" class="java.lang.String"/>
-	<field name="estado" class="java.lang.String"/>
+	<field name="estador" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -63,56 +63,56 @@
 	<columnHeader>
 		<band height="36" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="10" width="181" height="20" forecolor="#000000" backcolor="#CCCCFF" uuid="8beb0f59-5367-4039-8039-c11eae75c302"/>
-				<text><![CDATA[medico]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="182" y="10" width="134" height="20" backcolor="#CCCCFF" uuid="fe215a11-531c-4518-b562-7a50f21bfe96"/>
-				<text><![CDATA[especialidade]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="320" y="10" width="182" height="20" backcolor="#CCCCFF" uuid="f31db74c-6ac5-40c9-a5ad-0e281168f40a"/>
-				<text><![CDATA[paciente]]></text>
-			</staticText>
-			<staticText>
 				<reportElement mode="Opaque" x="504" y="10" width="114" height="20" backcolor="#CCCCFF" uuid="ee66492d-4168-472d-bd01-85c19bbc5d3f"/>
 				<text><![CDATA[dataconsulta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="621" y="10" width="98" height="20" backcolor="#CCCCFF" uuid="4faacd69-8e3b-4ef8-a6f8-cd2fc249a05a"/>
-				<text><![CDATA[tipoconsulta]]></text>
+				<reportElement x="9" y="2" width="100" height="20" uuid="be015593-65a6-4be5-9974-a2eaee12abbd"/>
+				<text><![CDATA[medicor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="721" y="10" width="80" height="20" backcolor="#CCCCFF" uuid="9ff79e2b-d0a5-4cdd-a031-c37882fea39f"/>
-				<text><![CDATA[estado]]></text>
+				<reportElement x="122" y="2" width="100" height="20" uuid="a180071d-8103-4f06-a897-1afc818bedc1"/>
+				<text><![CDATA[especialidader]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="2" width="100" height="20" uuid="eec5a63c-a836-4627-b67e-597e7f7ce20a"/>
+				<text><![CDATA[pacienter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="2" width="100" height="20" uuid="1f49a1f2-4a59-4cc0-88cc-f03fcbdf0441"/>
+				<text><![CDATA[estador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="651" y="2" width="100" height="20" uuid="d52631da-45e4-40f4-8f3b-619fa168fb10"/>
+				<text><![CDATA[tipoconsulta]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="25" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="181" height="20" uuid="afdbb316-56e0-4527-b8f2-1303955695a8"/>
-				<textFieldExpression><![CDATA[$F{medico}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="182" y="0" width="134" height="20" uuid="9d689f41-b9b0-4a10-9b59-6c6798d7e7fb"/>
-				<textFieldExpression><![CDATA[$F{especialidade}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="320" y="0" width="182" height="20" uuid="30d3553b-8110-4d5b-ba90-848f233d6794"/>
-				<textFieldExpression><![CDATA[$F{paciente}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="504" y="0" width="114" height="20" uuid="71afc9f6-3fe4-4779-b052-6610f7da080d"/>
 				<textFieldExpression><![CDATA[$F{dataconsulta}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="621" y="0" width="98" height="20" uuid="b5e85d7c-6355-4d61-b9b2-c1774b8317c5"/>
-				<textFieldExpression><![CDATA[$F{tipoconsulta}]]></textFieldExpression>
+				<reportElement x="9" y="5" width="100" height="20" uuid="ec6360cb-9c6d-4091-9e71-aaa06b60ae8c"/>
+				<textFieldExpression><![CDATA[$F{medicor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="721" y="0" width="80" height="20" uuid="a17d2141-f7c1-45ec-a5e3-66da32c01d1c"/>
-				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+				<reportElement x="122" y="5" width="100" height="20" uuid="e42705a5-a9a9-4452-afa2-c474ccb45672"/>
+				<textFieldExpression><![CDATA[$F{especialidader}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="5" width="100" height="20" uuid="b9e275e4-bc27-4423-9a6d-8089819e7ad5"/>
+				<textFieldExpression><![CDATA[$F{pacienter}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="5" width="100" height="20" uuid="a09c52b9-c5a2-4034-a6a1-3704a10871bc"/>
+				<textFieldExpression><![CDATA[$F{estador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="651" y="5" width="100" height="20" uuid="6a45a21b-159c-4a74-9c0d-b39443608a91"/>
+				<textFieldExpression><![CDATA[$F{tipoconsulta}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

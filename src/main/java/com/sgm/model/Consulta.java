@@ -95,6 +95,9 @@ public class Consulta implements Serializable {
     public Especialidade getEspecialidade() {
         return especialidade;
     }
+    public String getEspecialidader() {
+        return especialidade.getDescription();
+    }
 
     public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
@@ -112,12 +115,19 @@ public class Consulta implements Serializable {
         return paciente;
     }
 
+    public String getPacienter() {
+        return paciente.getName();
+    }
+    
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 
     public Medico getMedico() {
         return medico;
+    }
+    public String getMedicor() {
+        return medico.getName();
     }
 
     public void setMedico(Medico medico) {
@@ -126,6 +136,9 @@ public class Consulta implements Serializable {
 
     public Estado getEstado() {
         return estado;
+    }
+    public String getEstador() {
+        return estado.getDescription();
     }
 
     public void setEstado(Estado estado) {

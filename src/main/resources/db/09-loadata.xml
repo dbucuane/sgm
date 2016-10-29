@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <changeSet author="user (generated)" id="1477763416615-2">
+        <loadData catalogName="sgm"
+              encoding="UTF-8"
+              file="src/main/resources/data/grupos.csv"
+              schemaName="public"
+              separator=","
+              tableName="grupo">
+            <column name="description" type="STRING"/>
+            <column name="obs" type="STRING"/>
+        </loadData>
+    </changeSet>
+    
+    <changeSet author="user (generated)" id="1477763416615-3">
+        <loadData catalogName="sgm"
+              encoding="UTF-8"
+              file="src/main/resources/data/items.csv"
+              schemaName="public"
+              separator=","
+              tableName="item">
+            <column name="icon" type="STRING"/>
+            <column name="nameValue" type="STRING"/>
+            <column name="target" type="STRING"/>
+            <column name="url" type="STRING"/>
+        </loadData>
+    </changeSet>
+    
+    <changeSet author="user (generated)" id="1477763416615-4">
+        <loadData catalogName="sgm"
+              encoding="UTF-8"
+              file="src/main/resources/data/roles.csv"
+              schemaName="public"
+              separator=","
+              tableName="role">
+            <column name="grupo" type="NUMERIC"/>
+            <column name="item" type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+    
+    <changeSet author="user (generated)" id="1477763416615-5">
+        <loadData catalogName="sgm"
+              encoding="UTF-8"
+              file="src/main/resources/data/users.csv"
+              schemaName="public"
+              separator=","
+              tableName="utilizador">
+            <column name="email" type="STRING"/>
+            <column name="fullname" type="STRING"/>
+            <column name="password" type="STRING"/>
+            <column name="tipo" type="NUMERIC"/>
+            <column name="username" type="STRING"/>
+            <column name="grupo" type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+    
+</databaseChangeLog>
