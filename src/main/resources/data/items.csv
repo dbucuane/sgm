@@ -1,3 +1,6 @@
-icon,nameValue,target,url
+﻿icon,nameValue,target,url
 ui-icon-home,Gerir Grupos,frame,/profile_group.jsf
 ui-icon-home,Gerir Utilizadores,frame,/profile_users.jsf
+ui-icon-home,Consultas,frame,/profile_assistant.jsf
+ui-icon-home,Pacientes,frame,/pacientes.jsf
+ui-icon-home,Medicos,frame,/doctors.jsf

@@ -11,13 +11,10 @@ import com.sgm.model.Estado;
 import com.sgm.model.Medico;
 import com.sgm.model.Paciente;
 import com.sgm.service.RepositoryService;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -84,6 +81,7 @@ public class ConsultaRController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Guardado com Sucesso! ", "Guardado..."));
 
         } catch (Exception e) {
+            e.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Falha no Registo! ", e.getLocalizedMessage()));
         }
         context.execute("PF('dlg2').hide();");
@@ -96,11 +94,11 @@ public class ConsultaRController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Seleccione Item de Busca! ", "Guardado..."));
         } else {
             if (radio.equals("Medico")) {
-                
+                System.out.println("entrou");
 
                 try {
                     JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(consultas);
-                    jasperPrint = JasperFillManager.fillReport("C:\\Users\\user\\Documents\\NetBeansProjects\\sgm\\src\\main\\java\\com\\sgm\\reports\\ConsultasPormedico.jasper", new HashMap(), beanCollectionDataSource);
+                    jasperPrint = JasperFillManager.fillReport("C:\\Users\\User\\Documents\\NetBeansProjects\\sgm\\src\\main\\java\\com\\sgm\\reports\\ConsultasPormedico.jasper", new HashMap(), beanCollectionDataSource);
 
                     HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
                     httpServletResponse.addHeader("Content-disposition", "attachment; filename=RelatorioEquipamentosPorFuncionario.pdf");
@@ -110,6 +108,7 @@ public class ConsultaRController implements Serializable {
                     FacesContext.getCurrentInstance().renderResponse();
                     System.out.println("tested");
                 } catch (JRException | IOException e) {
+                    System.out.println("errou");
                     e.printStackTrace();
                 }
             }
