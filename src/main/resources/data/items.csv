@@ -4,3 +4,6 @@ ui-icon-home,Gerir Utilizadores,frame,/profile_users.jsf
 ui-icon-home,Consultas,frame,/profile_assistant.jsf
 ui-icon-home,Pacientes,frame,/pacientes.jsf
 ui-icon-home,Medicos,frame,/doctors.jsf
+ui-icon-home,Especialidades,frame,/especialidades.jsf
+ui-icon-home,Consultas,frame,/profile_patient.jsf
+ui-icon-home,Gerir Consultas,frame,/profile_medico.jsf

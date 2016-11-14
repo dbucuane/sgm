@@ -55,10 +55,10 @@
 
                         <p:growl id="growl" life="2000" />
                         <p:panelGrid columns="2" style="width:100%;">
-                            <p:outputLabel for="espec" value="Especialidade"/>
-                            <p:selectOneMenu id="espec" value="#{p_mController.especialidade}"  >
-                                <f:selectItem itemLabel="Seleccione Especialidade" itemValue="" noSelectionOption="true" />    
-                                <f:selectItems value="#{p_mController.mapEsp}" />
+                            <p:outputLabel for="espec" value="Paciente"/>
+                            <p:selectOneMenu id="espec" value="#{p_mController.cpaciente}"  >
+                                <f:selectItem itemLabel="Seleccione Paciente" itemValue="" noSelectionOption="true" />    
+                                <f:selectItems value="#{p_mController.mapaciente}" />
                             </p:selectOneMenu>
                             <p:outputLabel for="inline" value="Data"/>
                             <p:calendar id="inline" value="#{p_mController.date1}" showOn="button" />
@@ -78,7 +78,7 @@
                             
                             <h:outputText value="Tem a Certeza que pretende Iniciar a Consulta?" />
                         </p:outputPanel>
-                        <p:commandButton style="margin:5px;" value="Guardar" update=":form1:dtable growl" icon="ui-icon-disk" action="#{p_mController.iniciarConsulta()}" process="@form"/>
+                        <p:commandButton style="margin:5px;" value="Sim" update=":form1:dtable growl" icon="ui-icon-disk" action="#{p_mController.iniciarConsulta()}" process="@form"/>
                         <p:commandButton style="margin:5px;" value="Cancelar" onclick="PF('dlg3').hide();" icon="ui-icon-close"/>
 
                     </h:form>

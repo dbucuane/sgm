@@ -1,2 +1,3 @@
 ﻿email,fullname,password,tipo,username,grupo
 admin@samona.com,Administrador Predefinido,admin,1,admin,1
+recepcionista@samona.com,Recepcionista Predefinido,recepcionista,2,recepcionista,2

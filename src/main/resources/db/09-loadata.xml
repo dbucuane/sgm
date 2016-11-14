@@ -15,6 +15,7 @@
         </loadData>
     </changeSet>
     
+    
     <changeSet author="user (generated)" id="1477763416615-3">
         <loadData catalogName="sgm"
               encoding="UTF-8"
@@ -54,6 +55,43 @@
             <column name="tipo" type="NUMERIC"/>
             <column name="username" type="STRING"/>
             <column name="grupo" type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+    
+    <changeSet author="user (generated)" id="1477763416615-6">
+        <loadData catalogName="sgm"
+              encoding="UTF-8"
+              file="src/main/resources/data/estado.csv"
+              schemaName="public"
+              separator=","
+              tableName="estado">
+            <column name="description" type="STRING"/>
+        </loadData>
+    </changeSet>
+    
+    <changeSet author="user (generated)" id="1477763416615-7">
+        <loadData catalogName="sgm"
+              encoding="UTF-8"
+              file="src/main/resources/data/especialidade.csv"
+              schemaName="public"
+              separator=","
+              tableName="especialidade">
+            <column name="description" type="STRING"/>
+        </loadData>
+    </changeSet>
+    
+    <changeSet author="user (generated)" id="1477763416615-8">
+        <loadData catalogName="sgm"
+              encoding="UTF-8"
+              file="src/main/resources/data/rec.csv"
+              schemaName="public"
+              separator=","
+              tableName="recepsionista">
+            <column name="iduser" type="NUMERIC"/>
+            <column name="name" type="STRING"/>
+            <column name="email" type="STRING"/>
+            <column name="cardnumber" type="STRING"/>
+            <column name="sexo" type="NUMERIC"/>
         </loadData>
     </changeSet>
     

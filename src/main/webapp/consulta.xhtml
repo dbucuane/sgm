@@ -27,11 +27,7 @@
                         
                         <p:commandButton update=":form1:dtable" oncomplete="PF('dlg2').show()" value="Prescrição Médica" style="margin-bottom: 2%; width: 90%;"/>
                         
-                        <p:commandButton value="Consulta de Segmento" style="margin-bottom: 2%; width: 90%;"/>
-                        
-                        <p:commandButton value="Teste Laboratorial" style="margin-bottom: 2%; width: 90%;" />
-                        
-                        <p:commandButton value="Terminar Consulta" style="margin-bottom: 2%; width: 90%;"/>
+                        <p:commandButton value="Terminar Consulta" style="margin-bottom: 2%; width: 90%;" onclick="PF('dlg3').show();"/>
 
                     </h:form>
 
@@ -57,7 +53,7 @@
                         <h:outputText id="add" value="#{p_mController.selectedconsult.paciente.address}" />
                     </p:panelGrid>
                     
-                    <p:panelGrid id="pan1" style="margin-top:20px">
+                    <p:panelGrid id="pan1" style="margin-top:20px; width: 100%">
                         <f:facet name="header">
                             <p:row>
                                 <p:column colspan="8">Processo do Paciente</p:column>
@@ -85,7 +81,7 @@
                                 </p:dataTable>
 
                             </p:column>
-                            <p:column colspan="4" >
+                            <p:column colspan="4" id="cl2">
                                 <p:dataTable id="dtable1" var="diagnostico" value="#{p_mController.diagnosticos}">
                                     <p:column headerText="Data" width="40%">
                                         <h:outputText value="#{diagnostico.datadiagnostico}"/>
@@ -130,7 +126,19 @@
 
                     </h:form>
                 </p:dialog>
+                <p:dialog header="Terminar Consulta" widgetVar="dlg3" style="font-size: 14px;" >
+                    <h:form id="form31" >
 
+                        <p:growl id="growl" life="2000" />
+                        <p:outputPanel id="groupDetail" style="text-align:center;">
+                            
+                            <h:outputText value="Tem a Certeza que pretende Terminar a Consulta?" />
+                        </p:outputPanel>
+                        <p:commandButton style="margin:5px;" value="Sim" update=":form1:dtable growl" icon="ui-icon-disk" action="#{p_mController.terminarConsulta()}" process="@form"/>
+                        <p:commandButton style="margin:5px;" value="Cancelar" onclick="PF('dlg3').hide();" icon="ui-icon-close"/>
+
+                    </h:form>
+                </p:dialog>        
 
             </p:layoutUnit>
         </p:layout>

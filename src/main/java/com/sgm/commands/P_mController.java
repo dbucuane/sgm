@@ -7,6 +7,8 @@ package com.sgm.commands;
 
 import com.sgm.model.Consulta;
 import com.sgm.model.Diagnostico;
+import com.sgm.model.Especialidade;
+import com.sgm.model.Estado;
 import com.sgm.model.Medico;
 import com.sgm.model.Paciente;
 import com.sgm.model.Utilizador;
@@ -39,20 +41,38 @@ public class P_mController implements Serializable {
     private Date date1;
     private String tipoconsulta;
     private Consulta selectedconsult;
-    private HashMap<String, Object> mapEsp = new HashMap<>();
-    private String especialidade;
     private Utilizador utilizador;
     private Paciente paciente;
+    private String cpaciente;
     // diagnostic...
     private String enfermidade;
     private String enfdescription;
     private String prescrições;
+    private HashMap<String, Object> mapaciente = new HashMap<>();
 
     public P_mController() {
     }
 
     public void guardar() {
+        RequestContext context = RequestContext.getCurrentInstance();
 
+        Consulta consulta = new Consulta();
+        consulta.setEspecialidade(medicoLoggado.getEspecialidade());
+        consulta.setEstado(new Estado(1)); //Marcada
+        consulta.setPaciente((Paciente) mapaciente.get(cpaciente));
+        consulta.setMedico(medicoLoggado);
+        consulta.setDataconsulta(date1);
+        consulta.setTipoconsulta(tipoconsulta);
+
+        try {
+
+            csimp.create(consulta);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Guardado com Sucesso! ", "Guardado..."));
+
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Falha no Registo! ", e.getLocalizedMessage()));
+        }
+        context.execute("PF('dlg2').hide();");
     }
 
     public void registarDiagnostico() {
@@ -88,6 +108,14 @@ public class P_mController implements Serializable {
         context.execute("PF('dlg2').hide();");
     }
 
+    public String getCpaciente() {
+        return cpaciente;
+    }
+
+    public void setCpaciente(String cpaciente) {
+        this.cpaciente = cpaciente;
+    }
+
     public String iniciarConsulta() {
         if (selectedconsult != null) {
             paciente = selectedconsult.getPaciente();
@@ -96,6 +124,18 @@ public class P_mController implements Serializable {
         return "profile_medico";
     }
 
+    public String terminarConsulta(){
+        if (selectedconsult != null) {
+            try {
+                selectedconsult.setEstado(new Estado(2));
+                csimp.edit(selectedconsult);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Terminado com Sucesso! ", "Guardado..."));
+            } catch (Exception e) {
+            }
+        }
+        return "profile_medico";
+    }
+    
     public Medico getMedicoLoggado() {
 
         return medicoLoggado;
@@ -173,25 +213,25 @@ public class P_mController implements Serializable {
         this.selectedconsult = selectedconsult;
     }
 
-    public HashMap<String, Object> getMapEsp() {
-        return mapEsp;
+    public HashMap<String, Object> getMapaciente() {
+        HashMap<String, Object> map = new HashMap<>();
+        for (Paciente e : csimp.findAll(Paciente.class)) {
+            map.put(e.getName(), e);
+        }
+        mapaciente = map;
+        return mapaciente;
     }
 
-    public void setMapEsp(HashMap<String, Object> mapEsp) {
-        this.mapEsp = mapEsp;
+    public void setMapaciente(HashMap<String, Object> mapaciente) {
+        this.mapaciente = mapaciente;
     }
 
-    public String getEspecialidade() {
-        return especialidade;
-    }
-
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
-    }
+    
 
     public List<Diagnostico> getDiagnosticos() {
-        if (paciente != null) {
-            diagnosticos = paciente.getDiagnosticos();
+        Consulta c = csimp.find(Consulta.class, selectedconsult.getIdconsulta());
+        if (c != null) {
+            diagnosticos = c.getPaciente().getDiagnosticos();
         }
         return diagnosticos;
     }
@@ -217,7 +257,8 @@ public class P_mController implements Serializable {
     }
 
     public List<Consulta> getConsultasPaciente() {
-        return paciente.getConsultas();
+        Consulta c = csimp.find(Consulta.class, selectedconsult.getIdconsulta());
+        return c.getPaciente().getConsultas();
     }
 
     public String getPrescrições() {
